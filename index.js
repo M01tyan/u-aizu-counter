@@ -27,6 +27,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // すべてのイベント処理のプロミスを格納する配列。
     let events_processed = [];
     var id = '';
+    var name = '';
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
@@ -34,14 +35,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "会津　太郎"
-                }));
+                name = event.message.text;
             } else if(event.message.text == "s1240236"){
+                id = event.message.text;
+            } else if(event.message.text == "確認"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "s1240236"
+                  text: id + " " + name
                 }));
             }
         }
