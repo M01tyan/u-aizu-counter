@@ -53,12 +53,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: id + ", " + name + ", " + field
                   }));
-                } else {
+                } else if(event.message.text.match(/s12[0-9]{8}/)) {
                   id = event.message.text.substr(0,8);
                   name = event.message.text.substr(9, 14);
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "あなたのフィールドを入力してください。"
+                  }));
+                } else {
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "入力形式がちがいます。"
                   }));
                 }
                 /*
