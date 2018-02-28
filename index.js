@@ -30,8 +30,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-            var id = '';
-            var name = '';
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
