@@ -32,6 +32,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
           var now = new Date();
+          var jisa = (new Date().getTimezoneOffset());
           var month = now.getMonth() + 1;
           var day = now.getDate();
           var year = now.getFullYear();
@@ -45,7 +46,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 name = event.message.text.substr(9, 14);
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: year + "  " + month + "  " + day + "  " + hours + "  " + minutes + "  " + seconds
+                    text: year + "  " + month + "  " + day + "  " + hours + "  " + minutes + "  " + seconds + "  " + jisa/60
                   }));
             //}
         }
