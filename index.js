@@ -49,7 +49,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if(event.message.text == "確認"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: id + " " + name
+                  text: id
                 }));
             }
         }
