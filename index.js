@@ -45,6 +45,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 var id = event.message.text.substr(0,8);
                 var name = event.message.text.substr(9, 14);
+                /*
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
                     altText: "授業に出席しましたか？",
@@ -65,7 +66,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       ]
                     }
                   }));
-
+                  */
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "message",
                   text: count
