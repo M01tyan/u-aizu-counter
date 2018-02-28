@@ -35,6 +35,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           var month = now.getMonth() + 1;
           var day = now.getDate();
           var year = now.getFullYear();
+          var hours = now.getHours();
+          var minutes = now.getMinutes();
+          var seconds = now.getSeconds();
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
@@ -42,7 +45,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 name = event.message.text.substr(9, 14);
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: year + "  " + month + "  " + day
+                    text: year + "  " + month + "  " + day + "  " + hours + "  " + minutes + "  " + seconds
                   }));
             //}
         }
