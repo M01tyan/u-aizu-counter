@@ -27,6 +27,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // すべてのイベント処理のプロミスを格納する配列。
     let events_processed = [];
     var now = new Date();
+    var month = now.getMonth() + 1;
+    var day = now.getDate();
+    var year = now.getFullYear();
     var id;
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
@@ -39,7 +42,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 name = event.message.text.substr(9, 14);
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: now
+                    text: year + "  " + month + "  " + day
                   }));
             //}
         }
