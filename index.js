@@ -47,6 +47,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
+
                 if(event.message.text == "CS" || event.message.text == "SY" || event.message.text == "CN" || event.message.text == "IT-SPR" || event.message.text == "IT-CMV" || event.message.text == "SE"){
                   field = event.message.text;
                   events_processed.push(bot.replyMessage(event.replyToken, {
@@ -57,10 +58,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   id = event.message.text.substr(0,8);
                   name = event.message.text.substr(9, 14);
                   if(id.match(/s12[0-9]{5}/) && name!=''){
-                    events_processed.push(bot.replyMessage(event.replyToken, {
-                      type: "text",
-                      text: "あなたのフィールドを入力してください"
-                    }));
+                    if(id[3] == 6 || id[3] == 5){
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: "あなたのクラスを入力してください。"
+                      }));
+                    } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: "あなたのフィールドを入力してください。"
+                      }));
+                    }
                   }
                 }
                 /*
