@@ -43,7 +43,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 var id = event.message.text.substr(0,8);
                 var name = event.message.text.substr(9, 14);
-                  events_processed.push(bot.replyMessage(event.replyToken, {
+                  setTimeout(function() {
+                    events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
                     altText: "this is a confirm template",
                     template: {
@@ -63,6 +64,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       ]
                     }
                   }));
+                }, 5000);
             //}
         }
     });
