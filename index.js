@@ -32,7 +32,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            if (event.messages.text != "こんにちは"){
+            if (event.messages.text != "s1240236"){
               id = event.message.text;
             }
             if (event.message.text == "こんにちは"){
