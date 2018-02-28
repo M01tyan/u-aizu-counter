@@ -26,6 +26,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
     // すべてのイベント処理のプロミスを格納する配列。
     let events_processed = [];
+    var now = new Date();
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
@@ -38,7 +39,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 setTimeout(function() {
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: id + ", " + name
+                    text: now
                   }));
                 }, 5000);
             //}
