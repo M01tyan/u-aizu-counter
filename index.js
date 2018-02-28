@@ -2,6 +2,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const mysql = require("mysql"); // MySQlをインポート
+var count = 5;
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -43,10 +45,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 var id = event.message.text.substr(0,8);
                 var name = event.message.text.substr(9, 14);
-                  setTimeout(function() {
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
-                    altText: "<-No   授業に出席しましたか？   Yes->",
+                    altText: "授業に出席しましたか？",
                     template: {
                       type: "confirm",
                       text: "授業に出席しましたか？",
@@ -64,7 +65,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       ]
                     }
                   }));
-                }, 5000);
+
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "message",
+                  text: count
+                }));
             //}
         }
     });
