@@ -15,13 +15,6 @@ const line_config = {
 server.listen(process.env.PORT || 3000);
 
 
-// -----------------------------------------------------------------------------
-// ルーター設定
-server.post('/webhook', line.middleware(line_config), (req, res, next) => {
-    res.sendStatus(200);
-    console.log(req.body);
-});
-
 // APIコールのためのクライアントインスタンスを作成
 const bot = new line.Client(line_config);
 
@@ -35,7 +28,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     let events_processed = [];
 
     // イベントオブジェクトを順次処理。
-    req.body.events.forEach((event) => {
+    req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
@@ -43,7 +36,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "おはよう"
+                    text: "これはこれは"
                 }));
             }
         }

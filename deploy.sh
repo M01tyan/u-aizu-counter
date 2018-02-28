@@ -1,3 +1,3 @@
 #!/bin/sh
 
-git add . && git commit -m 'Improve' && git push
+git add . && git commit -m 'improving' && git push heroku master
