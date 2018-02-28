@@ -2,8 +2,10 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const json = require("jsonfile");
-
+var id = '';
+var name = '';
+var field = '';
+var lesson = [ { name: '', count: ''}];
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -45,9 +47,19 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                var id = event.message.text.substr(0,8);
-                var name = event.message.text.substr(9, 14);
-                json.writeFile('DB.json', { id: id, name: name}, function(err){});
+                id = event.message.text.substr(0,8);
+                name = event.message.text.substr(9, 14);
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "あなたのフィールドを入力してください。"
+                }));
+                if(event.message.text == "CS" || event.message.text == "SY" || event.message.text == "CN" || event.message.text == "IT-SPR" || event.message.text == "IT-CMV" || event.message.text == "SE"){
+                  field = event.message.text;
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: id + ", " + name + ", " + field 
+                  }));
+                }
                 /*
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
@@ -70,11 +82,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                   }));
                   */
-                count -= 1;
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: count
-                }));
             //}
         }
     });
