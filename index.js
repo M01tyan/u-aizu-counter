@@ -34,9 +34,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 var id = event.message.text.substr(0,8);
+                var name = event.message.text.substr(9, 14);
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: id
+                  text: id + ", " + name
                 }));
             //}
         }
