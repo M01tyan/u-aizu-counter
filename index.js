@@ -46,7 +46,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   setTimeout(function() {
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
-                    altText: "<-Yes 授業に出席しましたか？ No->",
+                    altText: "<-No   授業に出席しましたか？   Yes->",
                     template: {
                       type: "confirm",
                       text: "授業に出席しましたか？",
