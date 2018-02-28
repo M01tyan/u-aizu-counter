@@ -28,27 +28,20 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     let events_processed = [];
     var now = new Date();
     var id;
-    var name;
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
-            if (event.message.text == "確認"){
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: id + ", " + name
-              }));
-            } else {
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 id = event.message.text.substr(0,8);
                 name = event.message.text.substr(9, 14);
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: id + ", " + name
+                    text: now
                   }));
-            }
+            //}
         }
     });
 
