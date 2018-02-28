@@ -28,6 +28,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     let events_processed = [];
     var now = new Date();
     var id;
+    var name;
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
