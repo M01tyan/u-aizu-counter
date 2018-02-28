@@ -53,18 +53,20 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     type: "text",
                     text: id + ", " + name + ", " + field
                   }));
-                } else if(event.message.text.match(/s12[0-9]{5}{1-15}/)) {
+                } else {
                   id = event.message.text.substr(0,8);
                   name = event.message.text.substr(9, 14);
+                  while(!id.match(/s12[0-9]{5}/) || !name.match(/{1-15}/)){
+                    events_processed.push(bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "入力形式がちがいます。"
+                    }));
+                  }
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "あなたのフィールドを入力してください。"
+                    text: "あなたのフィールドを入力してください"
                   }));
-                } else {
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "入力形式がちがいます。"
-                  }));
+                  }
                 }
                 /*
                     events_processed.push(bot.replyMessage(event.replyToken, {
