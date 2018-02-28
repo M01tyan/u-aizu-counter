@@ -47,9 +47,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   text: id
                 }));
             } else if(event.message.text == "確認"){
+                id = id;
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "ok"
+                  text: id
                 }));
             }
         }
