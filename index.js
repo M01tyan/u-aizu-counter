@@ -35,17 +35,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                setName(event.message.text);
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: name
                 }));
+                setName(event.message.text);
             } else if(event.message.text == "s1240236"){
-                setId(event.message.text);
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: id
                 }));
+                setId(event.message.text);
             } else if(event.message.text == "確認"){
                 id = getId();
                 name = getName();
