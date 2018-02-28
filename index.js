@@ -67,9 +67,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                   }));
                   */
+                count -= 1;
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: count-1
+                  text: count
                 }));
             //}
         }
