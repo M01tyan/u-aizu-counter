@@ -2,8 +2,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const mysql = require("mysql"); // MySQlをインポート
-var count = 5;
+const json = require("jsonfile");
+
 
 // -----------------------------------------------------------------------------
 // パラメータ設定
@@ -32,6 +32,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+          /*
           var now = new Date();
           var jisa = (new Date().getTimezoneOffset());
           var month = now.getMonth() + 1;
@@ -40,11 +41,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           var hours = now.getHours();
           var minutes = now.getMinutes();
           var seconds = now.getSeconds();
+          */
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 var id = event.message.text.substr(0,8);
                 var name = event.message.text.substr(9, 14);
+                json.writeFile('DB.json', { id: id, name: name}, function(err){});
                 /*
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
