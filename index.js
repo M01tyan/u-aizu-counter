@@ -25,9 +25,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     res.sendStatus(200);
 
     // すべてのイベント処理のプロミスを格納する配列。
-    let events_processed = [];
-    let id = '';
-    let name = '';
+    var events_processed = [];
+    var id = '';
+    var name = '';
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
