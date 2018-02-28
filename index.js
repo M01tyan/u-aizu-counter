@@ -69,6 +69,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         text: "あなたのフィールドを入力してください。"
                       }));
                     }
+                  } else {
+                    events_processed.push(bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "もう一度学籍番号と名前を入力してください。"
+                    }));
                   }
                 }
                 /*
