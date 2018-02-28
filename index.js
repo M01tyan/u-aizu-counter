@@ -35,7 +35,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           var month = now.getMonth() + 1;
           var day = now.getDate();
           var year = now.getFullYear();
-          var hours = now.getHours();
+          var hours = now.getHours() + 9;
           var minutes = now.getMinutes();
           var seconds = now.getSeconds();
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
