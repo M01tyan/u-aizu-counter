@@ -76,11 +76,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "ユーザー登録が完了しました。"
               }));
               //フィールドがきちんと入力されていない場合はもう一度
-            } else {
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "もう一度フィールドを入力してください。"
-              }));
+            } else if(event.message.text.substr(0,2) != "CS" || event.message.text.substr(0,2) != "SY" ||
+                      event.message.text.substr(0,2) != "CN" || event.message.text.substr(0,6) != "IT-SPR" ||
+                      event.message.text.substr(0,6) != "IT-CMV" || event.message.text.substr(0,2) != "SE"){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "もう一度フィールドを入力してください。"
+                }));
             }
             //クラスがきちんと入力されているかチェック
             if(event.message.text.substr(0,2).match(/C[1-6]{1}/)){
