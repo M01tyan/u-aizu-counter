@@ -73,11 +73,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             event.message.text.substr(0,2) == "CN" || event.message.text.substr(0,6) == "IT-SPR" ||
             event.message.text.substr(0,6) == "IT-CMV" || event.message.text.substr(0,2) == "SE") {
               userDivision = event.message.text;
-              count += 1;
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: userId + ", " + userName + ", " + userDivision
-              }));
+              mode = "base";
               //フィールドがきちんと入力されていない場合はもう一度
             } else {
               events_processed.push(bot.replyMessage(event.replyToken, {
