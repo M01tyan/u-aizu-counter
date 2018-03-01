@@ -6,7 +6,7 @@ var userId = '';
 var userName = '';
 var userDivision = '';
 var lesson = [];
-var count = 0;
+var mode = "init";
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
@@ -34,7 +34,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-          if(count == 0){
+          if(mode == "init"){
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
             //学籍番号と名前の入力形式があっているかチェック
@@ -50,7 +50,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 }));
                 //3,4,5年生はフィールドを入力
               } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
-                count += 1;
+                mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あなたのフィールドを入力してください。"
@@ -63,7 +63,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "もう一度学籍番号と名前を入力してください。"
               }));
             }
-          } else if(count == 1) {
+          } else if(mode == "divisionInit") {
             events_processed.push(bot.replyMessage(event.replyToken, {
               type: "text",
               text: event.message.text
@@ -88,7 +88,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             //クラスがきちんと入力されているかチェック
             if(event.message.text.substr(0,2).match(/C[1-6]{1}/)){
               userDivision = event.message.text;
-              count += 1;
+              mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: userId + ", " + userName + ", " + userDivision
@@ -100,7 +100,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "もう一度クラスを入力してください。"
               }));
             }
-          } else if(count == 2){
+          } else if(mode == "base"){
             if(event.message.text == "確認"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
@@ -108,6 +108,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       "名前　　　　<" + userName + ">\n" +
                       "フィールド　<" + userDivision + ">"
               }));
+            } else if(event.message.text == "追加"){
+              mode = "addclass";
             }
           }
         }
