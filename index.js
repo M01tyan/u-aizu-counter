@@ -66,7 +66,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           } else if(count == 1) {
             events_processed.push(bot.replyMessage(event.replyToken, {
               type: "text",
-              text: "ok"
+              text: event.message.text
             }));
             //フィールドがきちんと入力されているかチェック
             if(event.message.text == "CS" || event.message.text == "SY" ||
