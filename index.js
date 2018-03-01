@@ -34,6 +34,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+          //ユーザー登録モード
           if(mode == "init"){
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
@@ -74,6 +75,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             event.message.text.substr(0,6) == "IT-CMV" || event.message.text.substr(0,2) == "SE") {
               userDivision = event.message.text;
               mode = "base";
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "ユーザー登録が完了しました"
+              }));
               //フィールドがきちんと入力されていない場合はもう一度
             } else {
               events_processed.push(bot.replyMessage(event.replyToken, {
@@ -87,7 +92,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: userId + ", " + userName + ", " + userDivision
+                text: "ユーザー登録が完了しました"
               }));
               //クラスがきちんと入力されていない場合はもう一度
             } else {
@@ -96,6 +101,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "もう一度クラスを入力してください。"
               }));
             }
+            //基本画面モード
           } else if(mode == "base"){
             if(event.message.text == "確認"){
               events_processed.push(bot.replyMessage(event.replyToken, {
@@ -104,6 +110,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       "名前　　　　<" + userName + ">\n" +
                       "フィールド　<" + userDivision + ">"
               }));
+              //授業追加モード
             } else if(event.message.text == "追加"){
               mode = "addclass";
             }
