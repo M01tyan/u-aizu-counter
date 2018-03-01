@@ -2,9 +2,9 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-var id = '';
-var name = '';
-var field = '';
+var useId = '';
+var useName = '';
+var userDivision = '';
 var lesson = [ { name: '', count: ''}];
 
 // -----------------------------------------------------------------------------
@@ -14,6 +14,26 @@ const line_config = {
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
 
+const message = {
+  type: "template",
+  altText: "授業に参加しましたか？",
+  template: {
+    type: "confirm",
+    text: "授業に参加しましたか？",
+    actions: [
+      {
+        type: "message",
+        label: "Yes",
+        text: "yes"
+      },
+      {
+        type: "message",
+        label: "No",
+        text: "no"
+      }
+    ]
+  }
+};
 // -----------------------------------------------------------------------------
 // Webサーバー設定
 server.listen(process.env.PORT || 3000);
@@ -34,6 +54,68 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+          var id = event.message.text.substr(0,8);
+          var name = event.message.text.substr(9, 14);
+          //学籍番号と名前の入力形式があっているかチェック
+          if(id.match(/s12[0-9]{5}/) && name!=''){
+            userId = id;
+            userName = name;
+            //1,2年生はクラスを入力
+            if(id[3] == 6 || id[3] == 5){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "あなたのクラスを入力してください。"
+              }));
+              //3,4,5年生はフィールドを入力
+            } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "あなたのフィールドを入力してください。"
+              }));
+            }
+            //入力形式が違う場合はもう一度
+          } else {
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "もう一度学籍番号と名前を入力してください。"
+            }));
+          }
+          //フィールドがきちんと入力されているかチェック
+          if(event.message.text.toUpperCase() == "CS" || event.message.text.toUpperCase() == "SY" ||
+             event.message.text.toUpperCase() == "CN" || event.message.text.toUpperCase() == "IT-SPR" ||
+             event.message.text.toUpperCase() == "IT-CMV" || event.message.text.toUpperCase() == "SE") {
+              var field = event.message.text.toUpperCase();
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: userId + ", " + UserName + ", " + userDivision
+              }));
+            }
+            //フィールドがきちんと入力されていない場合はもう一度
+          } else {
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "もう一度フィールドを入力してください。"
+            }));
+          }
+          //クラスがきちんと入力されているかチェック
+          if(event.message.text.toUpperCase() == "C1" || event.message.text.toUpperCase() == "C2" || event.message.text.toUpperCase() == "C3" ||
+             event.message.text.toUpperCase() == "C4" || event.message.text.toUpperCase() == "C5" || event.message.text.toUpperCase() == "C6"){
+              userDivision = event.message.text.toUpperCase();
+              setTimeout(function() {
+                bot.pushMessage('Uaa50760641533f7f848ae0089bb406cb', message)
+                .then(() => {
+                })
+                .catch((err) => {
+                  // error handling
+                });
+              }, 5000);
+          //クラスがきちんと入力されていない場合はもう一度
+          } else {
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: "もう一度クラスを入力してください。"
+            }));
+          }
           /*
           var now = new Date();
           var jisa = (new Date().getTimezoneOffset());
@@ -48,7 +130,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
 
-                if(event.message.text == "CS" || event.message.text == "SY" || event.message.text == "CN" || event.message.text == "IT-SPR" || event.message.text == "IT-CMV" || event.message.text == "SE"){
+                if(event.message.text.toUpperCase() == "CS" || event.message.text.toUpperCase() == "SY" || event.message.text.toUpperCase() == "CN" || event.message.text.toUpperCase() == "IT-SPR" || event.message.text.toUpperCase() == "IT-CMV" || event.message.text.toUpperCase() == "SE"){
                   field = event.message.text;
                   events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
