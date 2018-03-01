@@ -38,7 +38,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           var name = event.message.text.substr(9, 14);
           events_processed.push(bot.replyMessage(event.replyToken, {
             type: "text",
-            text: id + " " + name
+            text: event.message.text
           }));
           //学籍番号と名前の入力形式があっているかチェック
           if(id.match(/s12[0-9]{5}/) && name!=''){
