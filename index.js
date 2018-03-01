@@ -65,10 +65,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           } else if(count == 1) {
             //フィールドがきちんと入力されているかチェック
-            if(event.message.text.toUpperCase() == "CS" || event.message.text.toUpperCase() == "SY" ||
-            event.message.text.toUpperCase() == "CN" || event.message.text.toUpperCase() == "IT-SPR" ||
-            event.message.text.toUpperCase() == "IT-CMV" || event.message.text.toUpperCase() == "SE") {
-              userDivision = event.message.text.toUpperCase();
+            if(event.message.text == "CS" || event.message.text == "SY" ||
+            event.message.text == "CN" || event.message.text == "IT-SPR" ||
+            event.message.text == "IT-CMV" || event.message.text == "SE") {
+              userDivision = event.message.text;
               count += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
@@ -82,9 +82,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             }
             //クラスがきちんと入力されているかチェック
-            if(event.message.text.toUpperCase() == "C1" || event.message.text.toUpperCase() == "C2" || event.message.text.toUpperCase() == "C3" ||
-            event.message.text.toUpperCase() == "C4" || event.message.text.toUpperCase() == "C5" || event.message.text.toUpperCase() == "C6"){
-              userDivision = event.message.text.toUpperCase();
+            if(event.message.text == "C1" || event.message.text == "C2" || event.message.text == "C3" ||
+            event.message.text == "C4" || event.message.text == "C5" || event.message.text == "C6"){
+              userDivision = event.message.text;
               count += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
