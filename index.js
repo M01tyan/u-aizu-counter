@@ -93,7 +93,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "ユーザー登録が完了しました。"
               }));
               //クラスがきちんと入力されていない場合はもう一度
-            } else {
+            } else if(!event.message.text.substr(0,2).match(/C[1-6]{1}/)){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "もう一度クラスを入力してください。"
