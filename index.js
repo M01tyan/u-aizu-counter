@@ -1,4 +1,3 @@
-// -----------------------------------------------------------------------------
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
@@ -125,7 +124,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "absence";
             }
             //授業追加モード
-          } else if(mode == "addclass") {
+          } /*else if(mode == "addclass") {
             lesson.push({ "name": event.message.text, "count": 5});
           } else if(mode == "absence") {
             events_processed.push(bot.replyMessage(event.replyToken, {
@@ -145,7 +144,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               }
             }));
-          }
+          }*/
         }
     });
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
