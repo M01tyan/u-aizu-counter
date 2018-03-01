@@ -6,6 +6,7 @@ var userName = '';
 var userDivision = '';
 var lesson = [];
 var mode = "init";
+const count5 = "count5.jpg";
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
@@ -129,7 +130,15 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "image_carousel",
                   columns: [
                     {
-                      imageUrl: "https://page.line.me/cjg2466f/count_number/count5.jpg",
+                      imageUrl: count5,
+                      action: {
+                        type: "postback",
+                        label: "Buy",
+                        data: "action=buy&itemid=111"
+                      }
+                    },
+                    {
+                      imageUrl: "https://page.line.me/cjg2466f/count_number/count4.jpg",
                       action: {
                         type: "postback",
                         label: "Buy",
