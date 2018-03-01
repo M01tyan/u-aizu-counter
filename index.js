@@ -6,7 +6,7 @@ var userId = '';
 var userName = '';
 var userDivision = '';
 var lesson = [];
-var count = 0;
+var count = 1;
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
