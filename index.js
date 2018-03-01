@@ -2,8 +2,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-var useId = '';
-var useName = '';
+var userId = '';
+var userName = '';
 var userDivision = '';
 var lesson = [ { name: '', count: ''}];
 
