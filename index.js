@@ -34,8 +34,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-          var id = event.message.text.substr(0,8);
-          var name = event.message.text.substr(9, 14);
+          //var id = event.message.text.substr(0,8);
+          //var name = event.message.text.substr(9, 14);
           events_processed.push(bot.replyMessage(event.replyToken, {
             type: "text",
             text: event.message.text
@@ -106,35 +106,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             //if (event.message.text == "会津 太郎"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-
-                if(event.message.text.toUpperCase() == "CS" || event.message.text.toUpperCase() == "SY" || event.message.text.toUpperCase() == "CN" || event.message.text.toUpperCase() == "IT-SPR" || event.message.text.toUpperCase() == "IT-CMV" || event.message.text.toUpperCase() == "SE"){
-                  field = event.message.text;
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: id + ", " + name + ", " + field
-                  }));
-                } else {
-                  id = event.message.text.substr(0,8);
-                  name = event.message.text.substr(9, 14);
-                  if(id.match(/s12[0-9]{5}/) && name!=''){
-                    if(id[3] == 6 || id[3] == 5){
-                      events_processed.push(bot.replyMessage(event.replyToken, {
-                        type: "text",
-                        text: "あなたのクラスを入力してください。"
-                      }));
-                    } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
-                      events_processed.push(bot.replyMessage(event.replyToken, {
-                        type: "text",
-                        text: "あなたのフィールドを入力してください。"
-                      }));
-                    }
-                  } else {
-                    events_processed.push(bot.replyMessage(event.replyToken, {
-                      type: "text",
-                      text: "もう一度学籍番号と名前を入力してください。"
-                    }));
-                  }
-                }
                 /*
                     events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "template",
