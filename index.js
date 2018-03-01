@@ -69,9 +69,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               text: event.message.text
             }));
             //フィールドがきちんと入力されているかチェック
-            if(event.message.text == "CS" || event.message.text == "SY" ||
-            event.message.text == "CN" || event.message.text == "IT-SPR" ||
-            event.message.text == "IT-CMV" || event.message.text == "SE") {
+            if(event.message.text.substr(0,2) == "CS" || event.message.text.substr(0,2) == "SY" ||
+            event.message.text.substr(0,2) == "CN" || event.message.text.substr(0,6) == "IT-SPR" ||
+            event.message.text.substr(0,6) == "IT-CMV" || event.message.text.substr(0,2) == "SE") {
               userDivision = event.message.text;
               count += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
