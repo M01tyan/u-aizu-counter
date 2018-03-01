@@ -121,30 +121,26 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if(event.message.text == "ヘルプ"){
               mode = "help";
             } else if(event.message.text == "欠席数カウント"){
-              mode = "absence";
-            }
-            //授業追加モード
-          } /*else if(mode == "addclass") {
-            lesson.push({ "name": event.message.text, "count": 5});
-          } else if(mode == "absence") {
-            events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "template",
-              altText: "",
-              template: {
-                type: "image_carousel",
-                columns: [
-                  {
-                    imageUrl: "https://page.line.me/cjg2466f/count_number/count5.jpg",
-                    action: {
-                      type: "postback",
-                      label: "Buy",
-                      data: "action=buy&itemid=111"
+              //mode = "absence";
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "template",
+                altText: "",
+                template: {
+                  type: "image_carousel",
+                  columns: [
+                    {
+                      imageUrl: "https://page.line.me/cjg2466f/count_number/count5.jpg",
+                      action: {
+                        type: "postback",
+                        label: "Buy",
+                        data: "action=buy&itemid=111"
+                      }
                     }
-                  }
-                ]
-              }
-            }));
-          }*/
+                  ]
+                }
+              }));
+            }
+          }
         }
     });
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
