@@ -135,32 +135,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "image_carousel",
                 columns: [
                   {
-                    imageUrl: "https://u-aizu-counter.com/bot/images/count5.jpg",
+                    imageUrl: "https://api.line.me/v2/bot/images/count5.jpg",
                     action: {
                       type: "postback",
                       label: "Buy",
                       data: "action=buy&itemid=111"
                     }
-                  },
-                  {
-                    imageUrl: "https://u-aizu-counter.com/bot/images/count4.jpg",
-                    action: {
-                      type: "message",
-                      label: "Yes",
-                      data: "yes"
-                    }
-                  },
-                  {
-                    imageUrl: "https://u-aizu-counter.com/bot/images/count3.jpg",
-                    action: {
-                      type: "uri",
-                      label: "U-Aizu",
-                      data: "http://http://www.u-aizu.ac.jp/"
-                    }
                   }
                 ]
               }
             }));
+            */
           }
         }
     });
