@@ -86,7 +86,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             }
             //クラスがきちんと入力されているかチェック
-            if(event.message.text.substr(0,1).match(/C[1-6]{1}/)){
+            if(event.message.text.substr(0,2).match(/C[1-6]{1}/)){
               userDivision = event.message.text;
               count += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
