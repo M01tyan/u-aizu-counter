@@ -101,14 +101,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           if(event.message.text.toUpperCase() == "C1" || event.message.text.toUpperCase() == "C2" || event.message.text.toUpperCase() == "C3" ||
              event.message.text.toUpperCase() == "C4" || event.message.text.toUpperCase() == "C5" || event.message.text.toUpperCase() == "C6"){
               userDivision = event.message.text.toUpperCase();
-              setTimeout(function() {
-                bot.pushMessage('Uaa50760641533f7f848ae0089bb406cb', message)
-                .then(() => {
-                })
-                .catch((err) => {
-                  // error handling
-                });
-              }, 5000);
+              
           //クラスがきちんと入力されていない場合はもう一度
           } else {
             events_processed.push(bot.replyMessage(event.replyToken, {
