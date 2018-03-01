@@ -44,7 +44,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               userName = name;
               //1,2年生はクラスを入力
               if(id[3] == 6 || id[3] == 5){
-                count += 1;
+                mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: "あなたのクラスを入力してください。"
@@ -65,10 +65,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             }
           } else if(mode == "divisionInit") {
-            events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "text",
-              text: event.message.text
-            }));
             //フィールドがきちんと入力されているかチェック
             if(event.message.text.substr(0,2) == "CS" || event.message.text.substr(0,2) == "SY" ||
             event.message.text.substr(0,2) == "CN" || event.message.text.substr(0,6) == "IT-SPR" ||
