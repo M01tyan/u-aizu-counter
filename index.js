@@ -145,7 +145,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 ]
               }
             }));
-            */
           }
         }
     });
