@@ -77,7 +77,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "ユーザー登録が完了しました"
+                text: "ユーザー登録が完了しました。"
               }));
               //フィールドがきちんと入力されていない場合はもう一度
             } else {
@@ -92,7 +92,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "ユーザー登録が完了しました"
+                text: "ユーザー登録が完了しました。"
               }));
               //クラスがきちんと入力されていない場合はもう一度
             } else {
