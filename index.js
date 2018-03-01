@@ -104,9 +104,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             if(event.message.text == "確認"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "学籍番号　 " + userId + "\n" +
-                      "名前　　　 " + userName + "\n" +
-                      "フィールド " + userDivision
+                text: "学籍番号　　<" + userId + ">\n" +
+                      "名前　　　　<" + userName + ">\n" +
+                      "フィールド　<" + userDivision + ">"
               }));
             }
           }
