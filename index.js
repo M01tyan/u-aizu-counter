@@ -63,7 +63,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "もう一度学籍番号と名前を入力してください。"
               }));
             }
-          } else if(count == 1) {
+          } else if(count <= 1) {
             //フィールドがきちんと入力されているかチェック
             if(event.message.text == "CS" || event.message.text == "SY" ||
             event.message.text == "CN" || event.message.text == "IT-SPR" ||
