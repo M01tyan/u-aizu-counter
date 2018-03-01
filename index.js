@@ -109,6 +109,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               //授業追加モード
             } else if(event.message.text == "追加"){
               mode = "addclass";
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "あなたが履修中の授業名を入力してください\n" +
+                      "例：\n" +
+                      "MA01 線形代数I\n" +
+                      "線形代数I\n" +
+                      "MA01"
+              }));
             }
           } else if(mode == "addclass") {
             events_processed.push(bot.replyMessage(event.replyToken, {
