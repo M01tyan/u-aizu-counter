@@ -186,7 +186,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                           ]
                         }
                     ],
-                    imageAspectRatio: "rectangle",
+                    imageAspectRatio: "square",
                     imageSize: "cover"
                 }
               }));
