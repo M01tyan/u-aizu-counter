@@ -111,8 +111,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "addclass";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "あなたが履修中の授業名を入力してください\n" +
-                      "例：\n" +
+                text: "あなたが履修中の授業名を\n入力してください\n" +
+                      "\n例：\n" +
                       "MA01 線形代数I\n" +
                       "線形代数I\n" +
                       "MA01"
