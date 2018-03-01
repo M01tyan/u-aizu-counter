@@ -130,7 +130,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
       type: "image_carousel",
       columns: [
           {
-            imageUrl: "https://example.com/bot/images/item1.jpg",
+            imageUrl: "https://git.heroku.com/u-aizu-counter.git/img/count5.jpg",
             action: {
               type: "postback",
               label: "Buy",
@@ -138,7 +138,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           },
           {
-            imageUrl: "https://example.com/bot/images/item2.jpg",
+            imageUrl: "https://git.heroku.com/u-aizu-counter.git/img/count5.jpg",
             action: {
               type: "message",
               label: "Yes",
@@ -146,7 +146,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           },
           {
-            imageUrl: "https://example.com/bot/images/item3.jpg",
+            imageUrl: "https://git.heroku.com/u-aizu-counter.git/img/count5.jpg",
             action: {
               type: "uri",
               label: "View detail",
