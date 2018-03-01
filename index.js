@@ -103,7 +103,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
             //基本画面モード
           } else if(mode == "base"){
-            if(event.message.text == "確認"){
+            if(event.message.text == "ユーザー情報"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "学籍番号　　<" + userId + ">\n" +
