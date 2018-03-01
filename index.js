@@ -91,7 +91,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               count += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: userId + ", " + UserName + ", " + userDivision
+                text: userId + ", " + userName + ", " + userDivision
               }));
               //クラスがきちんと入力されていない場合はもう一度
             } else {
