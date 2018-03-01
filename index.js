@@ -36,10 +36,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
           var id = event.message.text.substr(0,8);
           var name = event.message.text.substr(9, 14);
-          events_processed.push(bot.replyMessage(event.replyToken, {
-            type: "text",
-            text: event.message.text.toUpperCase()
-          }));
           //学籍番号と名前の入力形式があっているかチェック
           if(id.match(/s12[0-9]{5}/) && name!=''){
             userId = id;
