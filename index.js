@@ -135,7 +135,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "image_carousel",
                 columns: [
                   {
-                    imageUrl: "https://api.line.me/v2/bot/images/count5.jpg",
+                    imageUrl: "https://page.line.me/cjg2466f/count_number/count5.jpg",
                     action: {
                       type: "postback",
                       label: "Buy",
