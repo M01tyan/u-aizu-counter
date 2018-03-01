@@ -108,7 +108,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       "名前　　　　<" + userName + ">\n" +
                       "フィールド　<" + userDivision + ">"
               }));
-              //授業追加モード
             } else if(event.message.text == "追加"){
               mode = "addclass";
               events_processed.push(bot.replyMessage(event.replyToken, {
@@ -119,11 +118,48 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       "線形代数I\n" +
                       "MA01"
               }));
+              //ヘルプモード
+            } else if(event.message.text == "ヘルプ"){
+              mode = "help";
+            } else if(event.message.text == "欠席数カウント"){
+              mode = "absence";
             }
+            //授業追加モード
           } else if(mode == "addclass") {
+            lesson.push({ "name": event.message.text, "count": 5});
+          } else if(mode == "absence") {
             events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "text",
-              text: "ok"
+              type: "template",
+              altText: "",
+              template: {
+                type: "image_carousel",
+                columns: [
+                  {
+                    imageUrl: "https://u-aizu-counter.com/bot/images/count5.jpg",
+                    action: {
+                      type: "postback",
+                      label: "Buy",
+                      data: "action=buy&itemid=111"
+                    }
+                  },
+                  {
+                    imageUrl: "https://u-aizu-counter.com/bot/images/count4.jpg",
+                    action: {
+                      type: "message",
+                      label: "Yes",
+                      data: "yes"
+                    }
+                  },
+                  {
+                    imageUrl: "https://u-aizu-counter.com/bot/images/count3.jpg",
+                    action: {
+                      type: "uri",
+                      label: "U-Aizu",
+                      data: "http://http://www.u-aizu.ac.jp/"
+                    }
+                  }
+                ]
+              }
             }));
           }
         }
