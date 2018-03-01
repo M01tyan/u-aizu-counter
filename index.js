@@ -124,10 +124,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if(event.message.text == "欠席数カウント"){
               //mode = "absence";
               events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "ok"
-              }));
-              events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "template",
                 altText: "",
                 template: {
