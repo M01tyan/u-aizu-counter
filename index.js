@@ -68,12 +68,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           if(event.message.text.toUpperCase() == "CS" || event.message.text.toUpperCase() == "SY" ||
              event.message.text.toUpperCase() == "CN" || event.message.text.toUpperCase() == "IT-SPR" ||
              event.message.text.toUpperCase() == "IT-CMV" || event.message.text.toUpperCase() == "SE") {
-              var field = event.message.text.toUpperCase();
+              userDivision = event.message.text.toUpperCase();
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: userId + ", " + UserName + ", " + userDivision
               }));
-            }
             //フィールドがきちんと入力されていない場合はもう一度
           } else {
             events_processed.push(bot.replyMessage(event.replyToken, {
@@ -85,7 +84,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           if(event.message.text.toUpperCase() == "C1" || event.message.text.toUpperCase() == "C2" || event.message.text.toUpperCase() == "C3" ||
              event.message.text.toUpperCase() == "C4" || event.message.text.toUpperCase() == "C5" || event.message.text.toUpperCase() == "C6"){
               userDivision = event.message.text.toUpperCase();
-
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: userId + ", " + UserName + ", " + userDivision
+              }));
           //クラスがきちんと入力されていない場合はもう一度
           } else {
             events_processed.push(bot.replyMessage(event.replyToken, {
@@ -93,45 +95,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               text: "もう一度クラスを入力してください。"
             }));
           }
-          /*
-          var now = new Date();
-          var jisa = (new Date().getTimezoneOffset());
-          var month = now.getMonth() + 1;
-          var day = now.getDate();
-          var year = now.getFullYear();
-          var hours = now.getHours();
-          var minutes = now.getMinutes();
-          var seconds = now.getSeconds();
-          */
-            // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            //if (event.message.text == "会津 太郎"){
-                // replyMessage()で返信し、そのプロミスをevents_processedに追加。
-                /*
-                    events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "template",
-                    altText: "授業に出席しましたか？",
-                    template: {
-                      type: "confirm",
-                      text: "授業に出席しましたか？",
-                      actions: [
-                        {
-                          type: "message",
-                          label: "Yes",
-                          text: "はい"
-                        },
-                        {
-                          type: "message",
-                          label: "No",
-                          text: "いいえ"
-                        }
-                      ]
-                    }
-                  }));
-                  */
-          }
         }
     });
-
     // すべてのイベント処理が終了したら何個のイベントが処理されたか出力。
     Promise.all(events_processed).then(
         (response) => {
