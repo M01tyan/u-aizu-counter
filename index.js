@@ -47,7 +47,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "template",
-                  altText: "あなたのフィールドをタップしてください。",
+                  altText: "あなたのクラスをタップしてください。",
                   template: {
                     type: "image_carousel",
                     columns: [
@@ -99,8 +99,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                           data: "C6"
                         }
                       }
-                    ],
-                    imageAspectRatio: "rectangle"
+                    ]
                   }
                 }));
                 //3,4,5年生はフィールドを入力
@@ -160,8 +159,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                           data: "SE"
                         }
                       }
-                    ],
-                    imageAspectRatio: "rectangle"
+                    ]
                   }
                 }));
               }
