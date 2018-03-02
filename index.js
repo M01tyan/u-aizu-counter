@@ -79,7 +79,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c4.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "選",
                           data: "C4"
                         }
                       },
