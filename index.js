@@ -33,18 +33,20 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-          events_processed.push(bot.replyMessage(event.replyToken, {
-            messages: [
-              {
-                type: "text",
-                text: "a"
-              },
-              {
-                type: "text",
-                text: "b"
-              }
-            ]
-          }));
+          if(event.message.text == "a"){
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              messages: [
+                {
+                  type: "text",
+                  text: "a"
+                },
+                {
+                  type: "text",
+                  text: "b"
+                }
+              ]
+            }));
+          }
           //ユーザー登録モード
           if(mode == "init"){
             var id = event.message.text.substr(0,8);
