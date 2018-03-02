@@ -6,7 +6,6 @@ var userName = '';
 var userDivision = '';
 var lesson = [];
 var mode = "init";
-const count5 = "count5.jpg";
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
