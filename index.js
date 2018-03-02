@@ -60,49 +60,49 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
                         action: {
-                          type: "postback",
-                          label: "CS",
-                          data: "userDivision=CS"
+                          type: "message",
+                          label: "選択",
+                          data: "CS"
                         }
                       },
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
                         action: {
-                          type: "postback",
-                          label: "SY",
-                          data: "userDivision=SY"
+                          type: "message",
+                          label: "選択",
+                          data: "SY"
                         }
                       },
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
                         action: {
-                          type: "postback",
-                          label: "CN",
-                          data: "userDivision=CN"
+                          type: "message",
+                          label: "選択",
+                          data: "CN"
                         }
                       },
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
                         action: {
-                          type: "postback",
-                          label: "IT-SPR",
-                          data: "userDivision=IT-SPR"
+                          type: "message",
+                          label: "選択",
+                          data: "IT-SPR"
                         }
                       },
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
                         action: {
-                          type: "postback",
-                          label: "IT-CMV",
-                          data: "userDivision=IT-CMV"
+                          type: "message",
+                          label: "選択",
+                          data: "IT-CMV"
                         }
                       },
                       {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
                         action: {
-                          type: "postback",
-                          label: "SE",
-                          data: "userDivision=SE"
+                          type: "message",
+                          label: "選択",
+                          data: "SE"
                         }
                       }
                     ]
