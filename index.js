@@ -55,7 +55,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c1.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "C1"
                         }
                       },
@@ -63,7 +63,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c2.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "C2"
                         }
                       },
@@ -71,7 +71,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c3.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "C3"
                         }
                       },
@@ -79,7 +79,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c4.jpg",
                         action: {
                           type: "message",
-                          label: "選",
+                          label: "choice",
                           data: "C4"
                         }
                       },
@@ -87,7 +87,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c5.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "C5"
                         }
                       },
@@ -95,7 +95,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c6.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "C6"
                         }
                       }
@@ -115,7 +115,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "CS"
                         }
                       },
@@ -123,7 +123,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "SY"
                         }
                       },
@@ -131,7 +131,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "CN"
                         }
                       },
@@ -139,7 +139,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "IT-SPR"
                         }
                       },
@@ -147,7 +147,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "IT-CMV"
                         }
                       },
@@ -155,7 +155,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
                         action: {
                           type: "message",
-                          label: "選択",
+                          label: "choice",
                           data: "SE"
                         }
                       }
