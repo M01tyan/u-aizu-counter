@@ -54,7 +54,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c1.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C1"
                         }
                       },
@@ -62,7 +62,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c2.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C2"
                         }
                       },
@@ -70,7 +70,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c3.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C3"
                         }
                       },
@@ -78,7 +78,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c4.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C4"
                         }
                       },
@@ -86,7 +86,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c5.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C5"
                         }
                       },
@@ -94,7 +94,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c6.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "C6"
                         }
                       }
@@ -114,7 +114,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "CS"
                         }
                       },
@@ -122,7 +122,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "SY"
                         }
                       },
@@ -130,7 +130,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "CN"
                         }
                       },
@@ -138,7 +138,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "IT-SPR"
                         }
                       },
@@ -146,7 +146,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "IT-CMV"
                         }
                       },
@@ -154,7 +154,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
                         action: {
                           type: "message",
-                          label: "choice",
+                          label: "選択",
                           text: "SE"
                         }
                       }
@@ -170,7 +170,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             }
           } else if(mode == "divisionInit") {
-            //フィールドがきちんと入力されているかチェック
+            //フィールドが選択されているかチェック
             if(event.message.text.substr(0,2) == "CS" || event.message.text.substr(0,2) == "SY" ||
             event.message.text.substr(0,2) == "CN" || event.message.text.substr(0,6) == "IT-SPR" ||
             event.message.text.substr(0,6) == "IT-CMV" || event.message.text.substr(0,2) == "SE") {
@@ -180,28 +180,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "ユーザー登録が完了しました。"
               }));
-              //フィールドがきちんと入力されていない場合はもう一度
-            } else if(event.message.text.substr(0,2) != "CS" || event.message.text.substr(0,2) != "SY" ||
-                      event.message.text.substr(0,2) != "CN" || event.message.text.substr(0,6) != "IT-SPR" ||
-                      event.message.text.substr(0,6) != "IT-CMV" || event.message.text.substr(0,2) != "SE"){
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "もう一度フィールドを入力してください。"
-                }));
             }
-            //クラスがきちんと入力されているかチェック
-            if(event.message.text.substr(0,2).match(/C[1-6]{1}/)){
+            //クラスが選択と入力されているかチェック
+            else if(event.message.text.substr(0,2).match(/C[1-6]{1}/)){
               userDivision = event.message.text;
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "ユーザー登録が完了しました。"
-              }));
-              //クラスがきちんと入力されていない場合はもう一度
-            } else if(!event.message.text.substr(0,2).match(/C[1-6]{1}/)){
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "もう一度クラスを入力してください。"
               }));
             }
             //基本画面モード
