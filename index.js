@@ -46,28 +46,67 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(id[3] == 6 || id[3] == 5){
                 mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "template",
-                    template: [
-                      {
-                        type: "message",
-                        text: "あなたのクラスを入力してください。"
-                      },
-                      {
-                        type: "text",
-                        text: "a"
-                      }
-                    ]
+
                 }));
                 //3,4,5年生はフィールドを入力
               } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
                 mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "あなたのフィールドを入力してください。"
-                }));
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "text",
-                  text: "a"
+                  type: "template",
+                  altText: "あなたのフィールドをタップしてください。",
+                  template: {
+                    type: "image_carousel",
+                    columns: [
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
+                        action: {
+                          type: "postback",
+                          label: "CS",
+                          data: "userDivision=CS"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
+                        action: {
+                          type: "postback",
+                          label: "SY",
+                          data: "userDivision=SY"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
+                        action: {
+                          type: "postback",
+                          label: "CN",
+                          data: "userDivision=CN"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
+                        action: {
+                          type: "postback",
+                          label: "IT-SPR",
+                          data: "userDivision=IT-SPR"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
+                        action: {
+                          type: "postback",
+                          label: "IT-CMV",
+                          data: "userDivision=IT-CMV"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
+                        action: {
+                          type: "postback",
+                          label: "SE",
+                          data: "userDivision=SE"
+                        }
+                      }
+                    ]
+                  }
                 }));
               }
               //入力形式が違う場合はもう一度
