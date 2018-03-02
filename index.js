@@ -60,6 +60,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   type: "text",
                   text: "あなたのフィールドを入力してください。"
                 }));
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "a"
+                }));
               }
               //入力形式が違う場合はもう一度
             } else {
