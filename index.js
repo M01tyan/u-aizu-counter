@@ -55,7 +55,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C1"
+                          text: "C1"
                         }
                       },
                       {
@@ -63,7 +63,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C2"
+                          text: "C2"
                         }
                       },
                       {
@@ -71,7 +71,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C3"
+                          text: "C3"
                         }
                       },
                       {
@@ -79,7 +79,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C4"
+                          text: "C4"
                         }
                       },
                       {
@@ -87,7 +87,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C5"
+                          text: "C5"
                         }
                       },
                       {
@@ -95,7 +95,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "C6"
+                          text: "C6"
                         }
                       }
                     ]
@@ -115,7 +115,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "CS"
+                          text: "CS"
                         }
                       },
                       {
@@ -123,7 +123,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "SY"
+                          text: "SY"
                         }
                       },
                       {
@@ -131,7 +131,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "CN"
+                          text: "CN"
                         }
                       },
                       {
@@ -139,7 +139,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "IT-SPR"
+                          text: "IT-SPR"
                         }
                       },
                       {
@@ -147,7 +147,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "IT-CMV"
+                          text: "IT-CMV"
                         }
                       },
                       {
@@ -155,7 +155,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         action: {
                           type: "message",
                           label: "choice",
-                          data: "SE"
+                          text: "SE"
                         }
                       }
                     ]
