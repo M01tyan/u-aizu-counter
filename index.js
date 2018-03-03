@@ -274,7 +274,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             } else {
               class_count.title = event.message.text;
+              var save = absence_count.template.columns[i];
               absence_count.template.columns.push(class_count);
+              absence_count.template.columns.push(save);
+              i += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: event.message.text + "を追加しました。"
