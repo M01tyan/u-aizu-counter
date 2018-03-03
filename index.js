@@ -109,7 +109,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 //3,4,5年生はフィールドを入力
               } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
                 mode = "divisionInit";
-                events_processed.push(bot.replyMessage(event.replyToken, {
+                events_processed.push(bot.replyMessage(event.replyToken, [{
+                  type: "text",
+                  text: "あなたのフィールドをタップしてください。"
+                },{
                   type: "template",
                   altText: "あなたのフィールドをタップしてください。",
                   template: {
@@ -165,7 +168,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       }
                     ]
                   }
-                }));
+                }]));
               }
               //入力形式が違う場合はもう一度
             } else {
