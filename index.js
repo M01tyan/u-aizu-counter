@@ -310,10 +310,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
             lesson.push({"name": event.message.text, "count": 3});
             absence_count.template.columns[i].title = lesson[i].name;
-            absence_count.template.columns[i].thumbnailImageUrl += (lesson[i].count + ".jpg");
             events_processed.push(bot.replyMessage(event.replyToken, [
               {
-                type: "text",
+                type: "postback",
+                label: "Name",
+                data: absence_count.template.columns[i].thumbnailImageUrl += lesson[i].count + ".jpg",
                 text: event.message.text + "を追加しました。"
               },
               {
