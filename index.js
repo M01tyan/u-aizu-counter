@@ -6,6 +6,72 @@ var userName = '';
 var userDivision = '';
 var lesson = [];
 var mode = "init";
+var absence_count = {
+  type: "template",
+  altText: "this is a carousel template",
+  template: {
+      type: "carousel",
+      columns: [
+          {
+            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
+            imageBackgroundColor: "#FFFFFF",
+            title: "this is menu",
+            text: "description",
+            defaultAction: {
+                type: "uri",
+                label: "View detail",
+                uri: "http://example.com/page/123"
+            },
+            actions: [
+                {
+                    type: "postback",
+                    label: "Buy",
+                    data: "action=buy&itemid=111"
+                },
+                {
+                    type: "postback",
+                    label: "Add to cart",
+                    data: "action=add&itemid=111"
+                },
+                {
+                    type: "uri",
+                    label: "View detail",
+                    uri: "http://example.com/page/111"
+                }
+            ]
+          },
+          {
+            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
+            imageBackgroundColor: "#000000",
+            title: "this is menu",
+            text: "description",
+            defaultAction: {
+                type: "uri",
+                label: "View detail",
+                uri: "http://example.com/page/222"
+            },
+            actions: [
+                {
+                    type: "postback",
+                    label: "Buy",
+                    data: "action=buy&itemid=222"
+                },
+                {
+                    type: "postback",
+                    label: "Add to cart",
+                    data: "action=add&itemid=222"
+                },
+                {
+                    type: "uri",
+                    label: "View detail",
+                    uri: "http://example.com/page/222"
+                }
+            ]
+          }
+      ],
+      imageAspectRatio: "square",
+      imageSize: "cover"
+}
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
@@ -221,7 +287,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは終了と入力してください。"
+                  text: "授業追加を終了するときは\n終了と入力してください。"
                 }
               ]));
               //ヘルプモード
@@ -229,86 +295,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               mode = "help";
             } else if(event.message.text == "欠席数カウント"){
               //mode = "absence";
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "template",
-                altText: "this is a carousel template",
-                template: {
-                    type: "carousel",
-                    columns: [
-                        {
-                          thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
-                          imageBackgroundColor: "#FFFFFF",
-                          title: "this is menu",
-                          text: "description",
-                          defaultAction: {
-                              type: "uri",
-                              label: "View detail",
-                              uri: "http://example.com/page/123"
-                          },
-                          actions: [
-                              {
-                                  type: "postback",
-                                  label: "Buy",
-                                  data: "action=buy&itemid=111"
-                              },
-                              {
-                                  type: "postback",
-                                  label: "Add to cart",
-                                  data: "action=add&itemid=111"
-                              },
-                              {
-                                  type: "uri",
-                                  label: "View detail",
-                                  uri: "http://example.com/page/111"
-                              }
-                          ]
-                        },
-                        {
-                          thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
-                          imageBackgroundColor: "#000000",
-                          title: "this is menu",
-                          text: "description",
-                          defaultAction: {
-                              type: "uri",
-                              label: "View detail",
-                              uri: "http://example.com/page/222"
-                          },
-                          actions: [
-                              {
-                                  type: "postback",
-                                  label: "Buy",
-                                  data: "action=buy&itemid=222"
-                              },
-                              {
-                                  type: "postback",
-                                  label: "Add to cart",
-                                  data: "action=add&itemid=222"
-                              },
-                              {
-                                  type: "uri",
-                                  label: "View detail",
-                                  uri: "http://example.com/page/222"
-                              }
-                          ]
-                        }
-                    ],
-                    imageAspectRatio: "square",
-                    imageSize: "cover"
-                }
-              }));
+              events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
+            var i = 0;
+            absence_count.template.columns[i].title = lesson[i].name;
             lesson.push({"name": event.message.text, "count": 5});
-            events_processed.push(bot.replyMessage(event.replyToken, [
-              {
-                type: "text",
-                text: lesson[0].name
-              },
-              {
-                type: "text",
-                text: event.message.text
-              }
-            ]));
             if(event.message.text == "終了"){
               mode = "base";
             }
