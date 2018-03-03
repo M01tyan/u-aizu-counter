@@ -44,63 +44,68 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               //1,2年生はクラスを入力
               if(id[3] == 6 || id[3] == 5){
                 mode = "divisionInit";
-                events_processed.push(bot.replyMessage(event.replyToken, {
-                  type: "template",
-                  altText: "あなたのクラスをタップしてください。",
-                  template: {
-                    type: "image_carousel",
-                    columns: [
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c1.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C1"
+                events_processed.push(bot.replyMessage(event.replyToken, [
+                  {
+                    type: "text",
+                    text: "あなたのクラスをタップしてください。"
+                  },{
+                    type: "template",
+                    altText: "",
+                    template: {
+                      type: "image_carousel",
+                      columns: [
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c1.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C1"
+                          }
+                        },
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c2.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C2"
+                          }
+                        },
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c3.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C3"
+                          }
+                        },
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c4.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C4"
+                          }
+                        },
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c5.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C5"
+                          }
+                        },
+                        {
+                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c6.jpg",
+                          action: {
+                            type: "message",
+                            label: "選択",
+                            text: "C6"
+                          }
                         }
-                      },
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c2.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C2"
-                        }
-                      },
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c3.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C3"
-                        }
-                      },
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c4.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C4"
-                        }
-                      },
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c5.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C5"
-                        }
-                      },
-                      {
-                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/c6.jpg",
-                        action: {
-                          type: "message",
-                          label: "選択",
-                          text: "C6"
-                        }
-                      }
-                    ]
+                      ]
+                    }
                   }
-                }));
+                ]));
                 //3,4,5年生はフィールドを入力
               } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
                 mode = "divisionInit";
