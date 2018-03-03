@@ -292,6 +292,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 }
               }));
             }
+          } else if(mode == "addclass"){
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: event.message.text
+            }));
+            lesson.push({"name": event.message.text, "count": 5});
           }
         }
     });
