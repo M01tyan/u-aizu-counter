@@ -211,14 +211,19 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             } else if(event.message.text == "追加"){
               mode = "addclass";
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "あなたが履修中の授業名を\n入力してください\n" +
-                      "\n例：\n" +
-                      "MA01 線形代数I\n" +
-                      "線形代数I\n" +
-                      "MA01"
-              }));
+              events_processed.push(bot.replyMessage(event.replyToken, [
+                {
+                  type: "text",
+                  text: "あなたが履修中の授業名を\n入力してください\n" +
+                        "\n例：\n" +
+                        "MA01 線形代数I\n" +
+                        "線形代数I\n" +
+                        "MA01"
+                },{
+                  type: "text",
+                  text: "授業追加を終了するときは終了と入力してください。"
+                }
+              ]));
               //ヘルプモード
             } else if(event.message.text == "ヘルプ"){
               mode = "help";
@@ -295,14 +300,18 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           } else if(mode == "addclass"){
             lesson.push({"name": event.message.text, "count": 5});
             events_processed.push(bot.replyMessage(event.replyToken, [
-            {
-              type: "text",
-              text: lesson[0].name
-            },
-            {
-              type: "text",
-              text: event.message.text
-            }]));
+              {
+                type: "text",
+                text: lesson[0].name
+              },
+              {
+                type: "text",
+                text: event.message.text
+              }
+            ]));
+            if(event.message.text == "終了"){
+              mode = "base";
+            }
           }
         }
     });
