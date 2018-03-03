@@ -300,8 +300,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
-            absence_count.template.columns[i].title = lesson[i].name;
             lesson.push({"name": event.message.text, "count": 5});
+            absence_count.template.columns[i].title = lesson[i].name;
             events_processed.push(bot.replyMessage(event.replyToken, {
               type: "text",
               text: event.message.text + "を追加しました。"
