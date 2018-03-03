@@ -283,7 +283,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: event.message.text + "を追加しました。"
               },{
                 type: "text",
-                text: absence_count.template.columns
+                text: absence_count.template.columns[0]
               }]));
             }
           }
