@@ -267,6 +267,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           } else if(mode == "addclass"){
             if(event.message.text == "終了"){
+              i = 0;
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
@@ -274,7 +275,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             } else {
               class_count.title = event.message.text;
-              absence_count.template.columns.push(class_count);
+              var save = absence_count.template.columns[i];
+              absence_count.template.columns[i+1] = class_count;
+              absence_count.template.columns[i] = save;
+              i += 1;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: event.message.text + "を追加しました。"
