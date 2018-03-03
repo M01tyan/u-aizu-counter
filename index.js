@@ -302,7 +302,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           } else if(mode == "addclass"){
             if(event.message.text == "終了"){
               mode = "base";
-              i = 0;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "授業追加モードを終了します。"
