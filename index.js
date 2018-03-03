@@ -301,12 +301,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           } else if(mode == "addclass"){
             if(event.message.text == "終了"){
-              mode = "base";
-              i = 0;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
+              mode = "base";
+              i = 0;
             }
             lesson.push({"name": event.message.text, "count": 3});
             absence_count.template.columns[i].title = lesson[i].name;
