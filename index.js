@@ -48,8 +48,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   {
                     type: "text",
                     text: "あなたのクラスをタップしてください。"
-                  },
-                  {
+                  },{
                     type: "template",
                     altText: "",
                     template: {
@@ -110,69 +109,63 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 //3,4,5年生はフィールドを入力
               } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
                 mode = "divisionInit";
-                events_processed.push(bot.replyMessage(event.replyToken, [
-                  {
-                    type: "text",
-                    text: "あなたのフィールドをタップしてください。"
-                  },
-                  {
-                    type: "template",
-                    altText: "",
-                    template: {
-                      type: "image_carousel",
-                      columns: [
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "CS"
-                          }
-                        },
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "SY"
-                          }
-                        },
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "CN"
-                          }
-                        },
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "IT-SPR"
-                          }
-                        },
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "IT-CMV"
-                          }
-                        },
-                        {
-                          imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
-                          action: {
-                            type: "message",
-                            label: "選択",
-                            text: "SE"
-                          }
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "template",
+                  altText: "あなたのフィールドをタップしてください。",
+                  template: {
+                    type: "image_carousel",
+                    columns: [
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "CS"
                         }
-                      ]
-                    }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/sy.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "SY"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cn.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "CN"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_spr.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "IT-SPR"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/it_cmv.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "IT-CMV"
+                        }
+                      },
+                      {
+                        imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/se.jpg",
+                        action: {
+                          type: "message",
+                          label: "選択",
+                          text: "SE"
+                        }
+                      }
+                    ]
                   }
-                ]));
+                }));
               }
               //入力形式が違う場合はもう一度
             } else {
