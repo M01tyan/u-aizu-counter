@@ -298,7 +298,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
-            var i = 0;
             //absence_count.template.columns[i].title = lesson[i].name;
             lesson.push({"name": event.message.text, "count": 5});
             if(event.message.text == "終了"){
