@@ -7,69 +7,35 @@ var userDivision = '';
 var lesson = [];
 var i = 0;
 var mode = "init";
+var class_count = {
+  thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
+  imageBackgroundColor: "#FFFFFF",
+  title: "",
+  text: "description",
+  actions: [
+      {
+          type: "postback",
+          label: "Buy",
+          data: "action=buy&itemid=111"
+      },
+      {
+          type: "postback",
+          label: "Add to cart",
+          data: "action=add&itemid=111"
+      },
+      {
+          type: "uri",
+          label: "View detail",
+          uri: "http://example.com/page/111"
+      }
+  ]
+};
 var absence_count = {
   type: "template",
   altText: "this is a carousel template",
   template: {
       type: "carousel",
-      columns: [
-          {
-            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count",
-            imageBackgroundColor: "#FFFFFF",
-            title: "this is menu",
-            text: "description",
-            defaultAction: {
-                type: "uri",
-                label: "View detail",
-                uri: "http://example.com/page/123"
-            },
-            actions: [
-                {
-                    type: "postback",
-                    label: "Buy",
-                    data: "action=buy&itemid=111"
-                },
-                {
-                    type: "postback",
-                    label: "Add to cart",
-                    data: "action=add&itemid=111"
-                },
-                {
-                    type: "uri",
-                    label: "View detail",
-                    uri: "http://example.com/page/111"
-                }
-            ]
-          },
-          {
-            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
-            imageBackgroundColor: "#000000",
-            title: "this is menu",
-            text: "description",
-            defaultAction: {
-                type: "uri",
-                label: "View detail",
-                uri: "http://example.com/page/222"
-            },
-            actions: [
-                {
-                    type: "postback",
-                    label: "Buy",
-                    data: "action=buy&itemid=222"
-                },
-                {
-                    type: "postback",
-                    label: "Add to cart",
-                    data: "action=add&itemid=222"
-                },
-                {
-                    type: "uri",
-                    label: "View detail",
-                    uri: "http://example.com/page/222"
-                }
-            ]
-          }
-      ],
+      columns: [],
       imageAspectRatio: "square",
       imageSize: "cover"
     }
@@ -307,10 +273,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "授業追加モードを終了します。"
               }));
             } else {
-              lesson.push({"name": event.message.text, "count": 3});
-              absence_count.template.columns[i].title = lesson[i].name;
-              absence_count.template.columns[i].thumbnailImageUrl = "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count" + lesson[i].count + ".jpg";
-              i += 1;
+              class_count.title = event.message.text;
+              absence_count.template.columns.push(class_count);
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: event.message.text + "を追加しました。"
