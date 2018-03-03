@@ -14,7 +14,7 @@ var absence_count = {
       type: "carousel",
       columns: [
           {
-            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
+            thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count",
             imageBackgroundColor: "#FFFFFF",
             title: "this is menu",
             text: "description",
@@ -300,13 +300,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
-            lesson.push({"name": event.message.text, "count": 5});
-            absence_count.template.columns[i].title = lesson[i].name;
-            events_processed.push(bot.replyMessage(event.replyToken, {
-              type: "text",
-              text: event.message.text + "を追加しました。"
-            }));
-            i += 1;
             if(event.message.text == "終了"){
               mode = "base";
               i = 0;
@@ -315,6 +308,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "授業追加モードを終了します。"
               }));
             }
+            lesson.push({"name": event.message.text, "count": 3});
+            absence_count.template.columns[i].title = lesson[i].name;
+            absence_count.template.columns[i].thumbnailImageUrl += (lesson[i].count + ".jpg");
+            events_processed.push(bot.replyMessage(event.replyToken, {
+              type: "text",
+              text: event.message.text + "を追加しました。"
+            }));
+            i += 1;
           }
         }
     });
