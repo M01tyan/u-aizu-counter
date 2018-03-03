@@ -5,6 +5,7 @@ var userId = '';
 var userName = '';
 var userDivision = '';
 var lesson = [];
+var i = 0;
 var mode = "init";
 var absence_count = {
   type: "template",
@@ -71,7 +72,8 @@ var absence_count = {
       ],
       imageAspectRatio: "square",
       imageSize: "cover"
-}
+    }
+};
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
@@ -298,10 +300,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
-            //absence_count.template.columns[i].title = lesson[i].name;
+            absence_count.template.columns[i].title = lesson[i].name;
             lesson.push({"name": event.message.text, "count": 5});
+            i++;
             if(event.message.text == "終了"){
               mode = "base";
+              i = 0;
             }
           }
         }
