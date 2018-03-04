@@ -7,45 +7,12 @@ var userDivision = '';
 var lesson = [];
 var i = 0;
 var mode = "init";
-var class_count = {
-  thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
-  imageBackgroundColor: "#FFFFFF",
-  title: "",
-  text: "description",
-  actions: [
-      {
-          type: "postback",
-          label: "Buy",
-          data: "action=buy&itemid=111"
-      },
-      {
-          type: "postback",
-          label: "Add to cart",
-          data: "action=add&itemid=111"
-      },
-      {
-          type: "uri",
-          label: "View detail",
-          uri: "http://example.com/page/111"
-      }
-  ]
-};
 var absence_count = {
   type: "template",
   altText: "this is a carousel template",
   template: {
       type: "carousel",
-      columns: [{
-        },{
-        },{
-        },{
-        },{
-        },{
-        },{
-        },{
-        },{
-        },{
-      }],
+      columns: [],
       imageAspectRatio: "square",
       imageSize: "cover"
     }
@@ -277,16 +244,37 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }
           } else if(mode == "addclass"){
             if(event.message.text == "終了"){
-              i = 0;
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
             } else {
+              let class_count = {
+                thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
+                imageBackgroundColor: "#FFFFFF",
+                title: "",
+                text: "description",
+                actions: [
+                    {
+                        type: "postback",
+                        label: "Buy",
+                        data: "action=buy&itemid=111"
+                    },
+                    {
+                        type: "postback",
+                        label: "Add to cart",
+                        data: "action=add&itemid=111"
+                    },
+                    {
+                        type: "uri",
+                        label: "View detail",
+                        uri: "http://example.com/page/111"
+                    }
+                ]
+              };
               class_count.title = event.message.text;
-              absence_count.template.columns[i] = class_count;
-              i += 1;
+              absence_count.template.columns.push(class_count);
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: event.message.text + "を追加しました。"
