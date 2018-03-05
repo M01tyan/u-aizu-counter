@@ -59,7 +59,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。\n" + thrid_first
+                    text: "あなたのクラスをタップしてください。\n" + thrid_first[0]
                   },{
                     type: "template",
                     altText: "",
