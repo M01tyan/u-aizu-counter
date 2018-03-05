@@ -289,6 +289,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if(event.message.text == "欠席数カウント"){
               //mode = "absence";
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
+            } else if(event.message.text == "ユーザー登録"){
+              mode = "init";
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "ユーザー情報を再登録します。"
+              }));
             }
           } else if(mode == "addclass"){
             events_processed.push(bot.replyMessage(event.replyToken, [
@@ -306,10 +312,18 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             ]));
             if(event.message.text == "終了"){
               mode = "base";
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "授業追加モードを終了します。"
-              }));
+              events_processed.push(bot.replyMessage(event.replyToken, [
+                {
+                  type: "text",
+                  text: "授業追加モードを終了します。"
+                },{
+                  type: "text",
+                  text: "あなたの学籍番号と名前を入力してください。\n\n" +
+                        "例：\n" +
+                        "s12xxxxx\n" +
+                        "会津　太郎"
+                }
+              ]));
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
