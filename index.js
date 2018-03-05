@@ -1,7 +1,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const thrid_first = require("./Thrid_first.json");
+//const thrid_first = require("./Thrid_first.json");
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -19,7 +19,7 @@ var absence_count = {
       imageSize: "cover"
     }
 };
-console.log("hello!" + thrid_first);
+console.log("hello!" + i);
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
