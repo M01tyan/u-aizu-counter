@@ -61,7 +61,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。\n" + lesson[0]
+                    text: "あなたのクラスをタップしてください。\n"
                   },{
                     type: "template",
                     altText: "",
