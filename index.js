@@ -18,6 +18,7 @@ var absence_count = {
       imageSize: "cover"
     }
 };
+console.log("hello!");
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
