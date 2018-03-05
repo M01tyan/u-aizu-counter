@@ -228,7 +228,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "学籍番号　　<" + userId + ">\n" +
                       "名前　　　　<" + userName + ">\n" +
-                      "学年　　　　<" + userGrade + ".\n" +
+                      "学年　　　　<" + userGrade + ">\n" +
                       "フィールド　<" + userDivision + ">"
               }));
             } else if(event.message.text == "追加"){
