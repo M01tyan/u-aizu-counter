@@ -227,18 +227,26 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年" || userGrade == "4年"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "学籍番号　　<" + userId + ">\n" +
-                        "名前　　　　<" + userName + ">\n" +
-                        "学年　　　　<" + userGrade + ">\n" +
-                        "フィールド　<" + userDivision + ">"
+                  text: "学籍番号\n" +
+                        "　<" + userId + ">\n" +
+                        "名前\n" +
+                        "　<" + userName + ">\n" +
+                        "学年\n" +
+                        "　<" + userGrade + ">\n" +
+                        "フィールド\n" +
+                        "　<" + userDivision + ">"
                 }));
               } else if(userGrade == "1年" || userGrade == "2年") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "学籍番号　　<" + userId + ">\n" +
-                        "名前　　　　<" + userName + ">\n" +
-                        "学年　　　　<" + userGrade + ">\n" +
-                        "クラス　　　<" + userDivision + ">"
+                  text: "学籍番号\n" +
+                        "　<" + userId + ">\n" +
+                        "名前\n" +
+                        "　<" + userName + ">\n" +
+                        "学年\n" +
+                        "　<" + userGrade + ">\n" +
+                        "クラス\n" + 
+                        "　<" + userDivision + ">"
                 }));
               }
             } else if(event.message.text == "追加"){
