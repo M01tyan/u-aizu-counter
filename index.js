@@ -136,7 +136,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                           action: {
                             type: "postback",
                             label: "選択",
-                            data: "userDivision=CS",
+                            data: "userDivision=1",
                             text: "CS"
                           }
                         },
@@ -220,7 +220,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "学籍番号　　<" + userId + ">\n" +
                       "名前　　　　<" + userName + ">\n" +
-                      "フィールド　<" + postback.data.userDivision + ">"
+                      "フィールド　<" + userDivision + ">"
               }));
             } else if(event.message.text == "追加"){
               mode = "addclass";
