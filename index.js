@@ -228,7 +228,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     "type": "buttons",
                     "imageSize": "cover",
                     "imageBackgroundColor": "#FFFFFF",
-                    "text": "授業を追加する学期を選んでください。",
+                    "title": "授業を追加する学期を選んでください。",
                     "actions": [
                         {
                           "type": "message",
