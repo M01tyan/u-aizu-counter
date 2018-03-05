@@ -1,14 +1,13 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-var thrid_first = [];
-thrid_first = "./Thrid_first.json";
-var lesson = [];
 var userId = '';
 var userName = '';
+var userGrade = '';
 var userDivision = '';
 var i = 0;
 var mode = "init";
+var lesson = [];
 var absence_count = {
   type: "template",
   altText: "this is a carousel template",
@@ -118,8 +117,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                   }
                 ]));
+                if(id[3] == 6) {
+                  userGrade = "1年";
+                } else if(id[3] == 5) {
+                  userGrade = "2年";
+                }
                 //3,4,5年生はフィールドを入力
-              } else if(id[3] == 4 || id[3] == 3 || id[3] == 2){
+              } else if(id[3] == 4 || id[3] == 3){
                 mode = "divisionInit";
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
@@ -183,6 +187,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                   }
                 ]));
+                if(id[3] == 4) {
+                  userGrade = "3年";
+                } else if(id[3] == 3) {
+                  userGrade = "4年";
+                }
               }
               //入力形式が違う場合はもう一度
             } else {
@@ -219,6 +228,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "学籍番号　　<" + userId + ">\n" +
                       "名前　　　　<" + userName + ">\n" +
+                      "学年　　　　<" + userGrade + ".\n" +
                       "フィールド　<" + userDivision + ">"
               }));
             } else if(event.message.text == "追加"){
