@@ -1,7 +1,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const third_first = require("https://github.com/M01tyan/u-aizu-counter/Thrid_first.json");
+var third_first = require("https://github.com/M01tyan/u-aizu-counter/Thrid_first.json");
 var userId = '';
 var userName = '';
 var userDivision = '';
