@@ -224,13 +224,23 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             //基本画面モード
           } else if(mode == "base"){
             if(event.message.text == "ユーザー情報"){
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: "学籍番号　　<" + userId + ">\n" +
-                      "名前　　　　<" + userName + ">\n" +
-                      "学年　　　　<" + userGrade + ">\n" +
-                      "フィールド　<" + userDivision + ">"
-              }));
+              if(userGrade == "3年" || userGrade == "4年"){
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "学籍番号　　<" + userId + ">\n" +
+                        "名前　　　　<" + userName + ">\n" +
+                        "学年　　　　<" + userGrade + ">\n" +
+                        "フィールド　<" + userDivision + ">"
+                }));
+              } else if(userGrade == "1年" || userGrade == "2年") {
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: "学籍番号　　<" + userId + ">\n" +
+                        "名前　　　　<" + userName + ">\n" +
+                        "学年　　　　<" + userGrade + ">\n" +
+                        "クラス　　　<" + userDivision + ">"
+                }));
+              }
             } else if(event.message.text == "追加"){
               mode = "addclass";
               events_processed.push(bot.replyMessage(event.replyToken, {
