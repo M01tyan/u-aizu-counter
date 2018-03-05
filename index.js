@@ -1,7 +1,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-var thrid_first = "./Thrid_first.json";
+var thrid_first = [];
+thrid_first = "./Thrid_first.json";
 var lesson = [];
 var userId = '';
 var userName = '';
