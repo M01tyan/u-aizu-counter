@@ -2,10 +2,6 @@
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
 var lesson = [];
-$.getJSON("thrid_first.json")
-  .done(function (data) {
-    lesson.push(data);
-});
 var userId = '';
 var userName = '';
 var userDivision = '';
@@ -225,19 +221,38 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }));
             } else if(event.message.text == "追加"){
               mode = "addclass";
-              events_processed.push(bot.replyMessage(event.replyToken, [
-                {
-                  type: "text",
-                  text: "あなたが履修中の授業名を\n入力してください\n" +
-                        "\n例：\n" +
-                        "MA01 線形代数I\n" +
-                        "線形代数I\n" +
-                        "MA01"
-                },{
-                  type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。"
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                "type": "template",
+                "altText": "This is a buttons template",
+                "template": {
+                    "type": "buttons",
+                    "imageSize": "cover",
+                    "imageBackgroundColor": "#FFFFFF",
+                    "text": "授業を追加する学期を選んでください。",
+                    "actions": [
+                        {
+                          "type": "message",
+                          "label": "1学期",
+                          "text": "1学期"
+                        },
+                        {
+                          "type": "message",
+                          "label": "2学期",
+                          "text": "2学期"
+                        },
+                        {
+                          "type": "message",
+                          "label": "3学期",
+                          "text": "3学期"
+                        },
+                        {
+                          "type": "message",
+                          "label": "4学期",
+                          "text": "4学期"
+                        }
+                    ]
                 }
-              ]));
+              }));
               //ヘルプモード
             } else if(event.message.text == "ヘルプ"){
               mode = "help";
@@ -246,6 +261,19 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             }
           } else if(mode == "addclass"){
+            events_processed.push(bot.replyMessage(event.replyToken, [
+              {
+                type: "text",
+                text: "あなたが履修中の授業名を\n入力してください\n" +
+                      "\n例：\n" +
+                      "MA01 線形代数I\n" +
+                      "線形代数I\n" +
+                      "MA01"
+              },{
+                type: "text",
+                text: "授業追加を終了するときは\n終了と入力してください。"
+              }
+            ]));
             if(event.message.text == "終了"){
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
