@@ -1,11 +1,14 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-var third_first = require("https://github.com/M01tyan/u-aizu-counter/Thrid_first.json");
+var lesson = [];
+$.getJSON("thrid_first.json")
+  .done(function (data) {
+    lesson.push(data);
+});
 var userId = '';
 var userName = '';
 var userDivision = '';
-var lesson = [];
 var i = 0;
 var mode = "init";
 var absence_count = {
@@ -58,7 +61,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。\n"
+                    text: "あなたのクラスをタップしてください。\n" + lesson[0]
                   },{
                     type: "template",
                     altText: "",
