@@ -1,6 +1,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const third_first = require("./Thrid_first.json");
 var userId = '';
 var userName = '';
 var userDivision = '';
@@ -37,13 +38,16 @@ const bot = new line.Client(line_config);
 server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
     res.sendStatus(200);
-
     // すべてのイベント処理のプロミスを格納する配列。
     let events_processed = [];
     // イベントオブジェクトを順次処理。
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+          events_processed.push(bot.replyMessage(event.replyToken, {
+            type: "text",
+            text: thrid_first
+          }));
           //ユーザー登録モード
           if(mode == "init"){
             var id = event.message.text.substr(0,8);
