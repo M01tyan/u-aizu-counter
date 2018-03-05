@@ -44,10 +44,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.map((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-          events_processed.push(bot.replyMessage(event.replyToken, {
-            type: "text",
-            text: thrid_first
-          }));
           //ユーザー登録モード
           if(mode == "init"){
             var id = event.message.text.substr(0,8);
@@ -62,7 +58,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。"
+                    text: "あなたのクラスをタップしてください。\n" + thrid_first[0].name
                   },{
                     type: "template",
                     altText: "",
