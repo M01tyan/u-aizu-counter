@@ -219,7 +219,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "学籍番号　　<" + userId + ">\n" +
                       "名前　　　　<" + userName + ">\n" +
-                      "フィールド　<" + postback.data + ">"
+                      "フィールド　<" + userDivision + ">"
               }));
             } else if(event.message.text == "追加"){
               mode = "addclass";
