@@ -58,10 +58,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。" + third_first
+                    text: "あなたのクラスをタップしてください。"
                   },{
                     type: "template",
-                    altText: "",
+                    altText: "あなたのクラスをタップしてください。",
                     template: {
                       type: "image_carousel",
                       columns: [
