@@ -134,9 +134,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         {
                           imageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/cs.jpg",
                           action: {
-                            type: "postback",
+                            type: "message",
                             label: "選択",
-                            data: "userDivision=1",
                             text: "CS"
                           }
                         },
@@ -197,7 +196,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             if(event.message.text.substr(0,2) == "CS" || event.message.text.substr(0,2) == "SY" ||
             event.message.text.substr(0,2) == "CN" || event.message.text.substr(0,6) == "IT-SPR" ||
             event.message.text.substr(0,6) == "IT-CMV" || event.message.text.substr(0,2) == "SE") {
-              //userDivision = event.message.text;
+              userDivision = event.message.text;
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
