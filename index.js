@@ -1,8 +1,6 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const fs = require("fs");
-var thrid_first = js.readFileSync('./Thrid_first.json', 'utf8');
 var userId = '';
 var userName = '';
 var userGrade = '';
