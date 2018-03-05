@@ -1,6 +1,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const fs = require("fs");
+var thrid_first = js.readFileSync('./Thrid_first.json', 'utf8');
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -58,7 +60,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
-                    text: "あなたのクラスをタップしてください。"
+                    text: "あなたのクラスをタップしてください。" + third_first
                   },{
                     type: "template",
                     altText: "",
