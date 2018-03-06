@@ -345,8 +345,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
-            } else if(event.message.text == "1学期"){
-              length = 35;
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
@@ -374,7 +372,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(var i=0; i<spr_third.length; i++){
-                    if(event.message.text == spr_third[i].name){
+                    if(event.message.text === spr_third[i].name){
                       class_count.title = spr_third[i].code + " " + spr_third[i].name;
                       class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
@@ -382,7 +380,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         type: "text",
                         text: spr_third[i].code + " " + spr_third[i].name + "を追加しました。"
                       }));
-                    } else if(event.message.text == spr_third[i].code){
+                    } else if(event.message.text === spr_third[i].code){
                       class_count.title = spr_third[i].code + " " + spr_third[i].name;
                       class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
