@@ -5,7 +5,7 @@ var userId = '';
 var userName = '';
 var userGrade = '';
 var userDivision = '';
-var length;
+var addcnt;
 var mode = "init";
 var lesson = [];
 var absence_count = {
@@ -265,6 +265,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }
             } else if(event.message.text == "追加"){
               mode = "addclass";
+              addcnt = 0;
               events_processed.push(bot.replyMessage(event.replyToken, {
                 "type": "template",
                 "altText": "This is a buttons template",
@@ -326,20 +327,22 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               }
             }
           } else if(mode == "addclass"){
-            events_processed.push(bot.replyMessage(event.replyToken, [
-              {
-                type: "text",
-                text: "あなたが履修中の授業名を\n入力してください\n" +
-                      "\n例：\n" +
-                      "MA01 線形代数I\n" +
-                      "線形代数I\n" +
-                      "MA01"
-              },{
-                type: "text",
-                text: "授業追加を終了するときは\n終了と入力してください。"
-              }
-            ]));
-            if(event.message.text === "終了"){
+            if(addcnt == 0){
+              addcnt += 1;
+              events_processed.push(bot.replyMessage(event.replyToken, [
+                {
+                  type: "text",
+                  text: "あなたが履修中の授業名を\n入力してください\n" +
+                  "\n例：\n" +
+                  "MA01 線形代数I\n" +
+                  "線形代数I\n" +
+                  "MA01"
+                },{
+                  type: "text",
+                  text: "授業追加を終了するときは\n終了と入力してください。"
+                }
+              ]));
+            } else if(event.message.text === "終了"){
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
