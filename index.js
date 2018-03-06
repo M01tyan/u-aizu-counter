@@ -65,7 +65,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               //1,2年生はクラスを入力
               if(id[3] == 6 || id[3] == 5){
                 mode = "divisionInit";
-                var ok = jsonfile.readFileSync('./Thrid_first.json');
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
@@ -339,7 +338,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[0][0].name
+                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[0].length
                 }
               ]));
             } else if(event.message.text === "終了"){
