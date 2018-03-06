@@ -39,6 +39,7 @@ const third = [
   {"table": "月10", "time": "17:50 ~ 18:40", "code": "TE05", "name": "教育方法", "credits": "2", "room": "M2", "instructor": "-"},
   {"table": "月11", "time": "18:50 ~ 19:40", "code": "FU06", "name": "オペレーティングシステム論[再][演]", "credits": "4", "room": "std5, std6", "instructor": "松本　和也, 大井　仁"}
 ];
+var thrid_class = JSON.parse(thrid);
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -248,7 +249,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else {
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: "もう一度学籍番号と名前を入力してください。"
+                text: thrid_class
               }));
             }
           } else if(mode == "divisionInit") {
