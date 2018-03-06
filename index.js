@@ -58,7 +58,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               //1,2年生はクラスを入力
               if(id[3] == 6 || id[3] == 5){
                 mode = "divisionInit";
-                var json = read('./Thrid_first.json');
+                var content = fs.readFileSync('./Thrid_first.json', 'utf8');
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
@@ -121,7 +121,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                   }, {
                     type: "text",
-                    text: json
+                    text: content
                   }
                 ]));
                 if(id[3] == 6) {
