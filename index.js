@@ -88,7 +88,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             if(event.message.text == "あ"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: thrid[0].name
+                text: thrid
               }));
             }
             var id = event.message.text.substr(0,8);
