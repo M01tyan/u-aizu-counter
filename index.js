@@ -210,7 +210,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else {
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: third[0].name
+                text: "もう一度学籍番号と名前を入力\nしてください。"
               }));
             }
           } else if(mode == "divisionInit") {
@@ -321,7 +321,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               userGrade = '';
               userDivision = '';
               for(var i=0; i<absence_count.template.columns.length; i++){
-                  absence_count.template.columns[i] = NULL;
+                  absence_count.template.columns[i] = '';
               }
             }
           } else if(mode == "addclass"){
@@ -349,7 +349,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
                 imageBackgroundColor: "#FFFFFF",
                 title: "",
-                text: "description",
+                text: "",
                 actions: [
                     {
                         type: "postback",
@@ -368,12 +368,29 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     }
                 ]
               };
-              class_count.title = event.message.text;
-              absence_count.template.columns.push(class_count);
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: event.message.text + "を追加しました。"
-              }));
+              if(userGrade == "3年"){
+                if(userDivision == "IT-SPR"){
+                  for(var i=0; i<spr_third.length; i++){
+                    if(event.message.text.match(spr_third[i].name)){
+                      class_count.title = spr_third[i].code + " " + spr_third[i].name;
+                      class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                      absence_count.template.columns.push(class_count);
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: event.message.text + "を追加しました。"
+                      }));
+                    } else if(event.message.text.match(spr_third[i].code)){
+                      class_count.title = spr_third[i].code + " " + spr_third[i].name;
+                      class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                      absence_count.template.columns.push(class_count);
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: spr_third[i].code + " " + spr_third[i].name + "を追加しました。"
+                      }));
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -387,41 +404,132 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 });
 
 //授業情報
-const third = [
-  {table: "月1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
-  {table: "月1", time: "09:00 ~ 09:50", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
-  {table: "月1", time: "09:00 ~ 09:50", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
-  {table: "月1", time: "09:00 ~ 09:50", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
-  {table: "月2", time: "09:50 ~ 10:40", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
-  {table: "月2", time: "09:50 ~ 10:40", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
-  {table: "月2", time: "09:50 ~ 10:40", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
-  {table: "月2", time: "09:50 ~ 10:40", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
-  {table: "月3", time: "10:50 ~ 11:40", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
-  {table: "月4", time: "11:40 ~ 12:30", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
-  {table: "月5", time: "13:20 ~ 14:10", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
-  {table: "月6", time: "14:10 ~ 15:00", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
-  {table: "月7", time: "15:10 ~ 16:00", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
-  {table: "月7", time: "15:10 ~ 16:00", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
-  {table: "月7", time: "15:10 ~ 16:00", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
-  {table: "月8", time: "16:00 ~ 16:50", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
-  {table: "月8", time: "16:00 ~ 16:50", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
-  {table: "月8", time: "16:00 ~ 16:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
-  {table: "月8", time: "16:00 ~ 16:50", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
-  {table: "月9", time: "17:00 ~ 17:50", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
-  {table: "月10", time: "17:50 ~ 18:40", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
-  {table: "月11", time: "18:50 ~ 19:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"}
+const spr_third = [
+  [
+    //1学期月曜 0~35
+    {table: "月1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
+    {table: "月1", time: "09:00 ~ 09:50", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
+    {table: "月1", time: "09:00 ~ 09:50", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
+    {table: "月1", time: "09:00 ~ 09:50", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
+    {table: "月2", time: "09:50 ~ 10:40", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
+    {table: "月2", time: "09:50 ~ 10:40", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
+    {table: "月2", time: "09:50 ~ 10:40", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
+    {table: "月2", time: "09:50 ~ 10:40", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
+    {table: "月3", time: "10:50 ~ 11:40", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
+    {table: "月4", time: "11:40 ~ 12:30", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
+    {table: "月5", time: "13:20 ~ 14:10", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
+    {table: "月6", time: "14:10 ~ 15:00", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
+    {table: "月7", time: "15:10 ~ 16:00", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
+    {table: "月7", time: "15:10 ~ 16:00", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
+    {table: "月7", time: "15:10 ~ 16:00", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
+    {table: "月8", time: "16:00 ~ 16:50", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
+    {table: "月8", time: "16:00 ~ 16:50", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
+    {table: "月8", time: "16:00 ~ 16:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
+    {table: "月8", time: "16:00 ~ 16:50", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
+    {table: "月9", time: "17:00 ~ 17:50", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
+    {table: "月10", time: "17:50 ~ 18:40", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
+    {table: "月11", time: "18:50 ~ 19:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"},
+    //1学期火曜 36~48
+    {table: "火1", time: "09:00 ~ 09:50", code: "FU09", name: "アルゴリズムとデータ構造 II", credits: "3", room: "M4", instructor: "浅井　信吉"},
+    {table: "火2", time: "09:50 ~ 10:40", code: "FU09", name: "アルゴリズムとデータ構造 II", credits: "3", room: "M4", instructor: "浅井　信吉"},
+    {table: "火3", time: "10:50 ~ 11:40", code: "FU09", name: "アルゴリズムとデータ構造 II[演]", credits: "3", room: "std6", instructor: "鈴木　大郎"},
+    {table: "火5", time: "13:20 ~ 14:10", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
+    {table: "火6", time: "14:10 ~ 15:00", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
+    {table: "火7", time: "15:10 ~ 16:00", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
+    {table: "火8", time: "16:00 ~ 16:50", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
+    //1学期水曜 49~65
+    {table: "水2", time: "09:50 ~ 10:40", code: "IE01", name: "システム総合演習 I", credits: "3", room: "-", instructor: "--"},
+    {table: "水2", time: "09:50 ~ 10:40", code: "IE03", name: "ソフトウェア総合演習 I", credits: "3", room: "std6", instructor: "朱　欣"},
+    {table: "水3", time: "10:50 ~ 11:40", code: "IE01", name: "システム総合演習 I", credits: "3", room: "-", instructor: "--"},
+    {table: "水3", time: "10:50 ~ 11:40", code: "IE03", name: "ソフトウェア総合演習 I", credits: "3", room: "std6", instructor: "朱　欣"},
+    {table: "水4", time: "11:40 ~ 12:30", code: "IE01", name: "システム総合演習 I", credits: "3", room: "-", instructor: "--"},
+    {table: "水4", time: "11:40 ~ 12:30", code: "IE03", name: "ソフトウェア総合演習 I", credits: "3", room: "std6", instructor: "朱　欣"},
+    {table: "水5", time: "13:20 ~ 14:10", code: "OT08", name: "TOEIC準備コース(Level A)", credits: "1", room: "LTh", instructor: "桑田　カツ子"},
+    {table: "水5", time: "13:20 ~ 14:10", code: "TE04", name: "教育課程論", credits: "2", room: "M4", instructor: "-"},
+    {table: "水6", time: "14:10 ~ 15:00", code: "OT08", name: "TOEIC準備コース(Level A)", credits: "1", room: "LTh", instructor: "桑田　カツ子"},
+    {table: "水6", time: "14:10 ~ 15:00", code: "TE04", name: "教育課程論", credits: "2", room: "M4", instructor: "-"},
+    {table: "水7", time: "15:10 ~ 16:00", code: "OT08", name: "TOEIC準備コース(Level B", credits: "1", room: "iLab2", instructor: "桑田　カツ子"},
+    {table: "水7", time: "15:10 ~ 16:00", code: "TE04", name: "教育課程論", credits: "2", room: "M4", instructor: "-"},
+    {table: "水8", time: "16:00 ~ 16:50", code: "OT08", name: "TOEIC準備コース(Level B", credits: "1", room: "iLab2", instructor: "桑田　カツ子"},
+    {table: "水8", time: "16:00 ~ 16:50", code: "TE04", name: "教育課程論", credits: "2", room: "M4", instructor: "-"},
+    {table: "水9", time: "17:00 ~ 17:50", code: "OT05", name: "キャリアデザイン I", credits: "1", room: "M6", instructor: "杉山　雅英"},
+    {table: "水10", time: "17:50 ~ 18:40", code: "OT05", name: "キャリアデザイン I", credits: "1", room: "M6", instructor: "杉山　雅英"},
+    //1学期木曜 66~101
+    {table: "木1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
+    {table: "木1", time: "09:00 ~ 09:50", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
+    {table: "木1", time: "09:00 ~ 09:50", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
+    {table: "木1", time: "09:00 ~ 09:50", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
+    {table: "木2", time: "09:50 ~ 10:40", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
+    {table: "木2", time: "09:50 ~ 10:40", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
+    {table: "木2", time: "09:50 ~ 10:40", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
+    {table: "木2", time: "09:50 ~ 10:40", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
+    {table: "木3", time: "10:50 ~ 11:40", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
+    {table: "木4", time: "11:40 ~ 12:30", code: "IT08", name: "信号処理と線形システム", credits: "4", room: "M6", instructor: "朱　欣"},
+    {table: "木5", time: "13:20 ~ 14:10", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
+    {table: "木6", time: "14:10 ~ 15:00", code: "IT08", name: "信号処理と線形システム[演]", credits: "4", room: "std2", instructor: "朱　欣"},
+    {table: "木7", time: "15:10 ~ 16:00", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
+    {table: "木7", time: "15:10 ~ 16:00", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
+    {table: "木7", time: "15:10 ~ 16:00", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
+    {table: "木8", time: "16:00 ~ 16:50", code: "EL317", name: "Patterns and language", credits: "2", room: "CALL1", instructor: "ジョン　ブレイク"},
+    {table: "木8", time: "16:00 ~ 16:50", code: "NS03", name: "量子力学", credits: "2", room: "M2", instructor: "本間　道雄"},
+    {table: "木8", time: "16:00 ~ 16:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
+    {table: "木8", time: "16:00 ~ 16:50", code: "OT01-I", name: "ベンチャー基本コース各論 I", credits: "2", room: "M1", instructor: "程　子学, 石橋　史朗"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "FU06", name: "オペレーティングシステム論[再]", credits: "4", room: "M6", instructor: "松本　和也"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
+    {table: "木9", time: "17:00 ~ 17:50", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-1", name: "ベンチャー体験工房 1", credits: "1", room: "-", instructor: "程　子学, 荊　雷"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-2", name: "ベンチャー体験工房 2", credits: "1", room: "-", instructor: "出村　裕英, 平田　成, 小川　佳子, 本田　親寿, 北里　宏平, 奥平　恭子, 石橋　史朗"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-3", name: "ベンチャー体験工房 3", credits: "1", room: "-", instructor: "吉良　洋輔"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-6", name: "ベンチャー体験工房 6", credits: "1", room: "-", instructor: "吉岡　廉太郎, 星野　隆之（日本ユニシス）"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-7", name: "ベンチャー体験工房 7", credits: "1", room: "-", instructor: "石橋　史朗, サバシュ　バーラ"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "OT02-9", name: "ベンチャー体験工房 9", credits: "1", room: "-", instructor: "陳　文西"},
+    {table: "木10", time: "17:50 ~ 18:40", code: "TE05", name: "教育方法", credits: "2", room: "M2", instructor: "-"},
+    {table: "木11", time: "18:50 ~ 19:40", code: "FU06", name: "オペレーティングシステム論[再][演]", credits: "4", room: "std5, std6", instructor: "松本　和也, 大井　仁"},
+    //1学期金曜 102~114
+    {table: "火1", time: "09:00 ~ 09:50", code: "FU09", name: "アルゴリズムとデータ構造 II", credits: "3", room: "M4", instructor: "浅井　信吉"},
+    {table: "火2", time: "09:50 ~ 10:40", code: "FU09", name: "アルゴリズムとデータ構造 II", credits: "3", room: "M4", instructor: "浅井　信吉"},
+    {table: "火3", time: "10:50 ~ 11:40", code: "FU09", name: "アルゴリズムとデータ構造 II[演]", credits: "3", room: "std6", instructor: "鈴木　大郎"},
+    {table: "火5", time: "13:20 ~ 14:10", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
+    {table: "火6", time: "14:10 ~ 15:00", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
+    {table: "火7", time: "15:10 ~ 16:00", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
+    {table: "火8", time: "16:00 ~ 16:50", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
+  ], [
+    //2学期月曜
+    //2学期火曜
+    //2学期水曜
+    //2学期木曜
+    //2学期金曜
+  ], [
+    //3学期月曜
+    //3学期火曜
+    //3学期水曜
+    //3学期木曜
+    //3学期金曜
+  ], [
+    //4学期月曜
+    //4学期火曜
+    //4学期水曜
+    //4学期木曜
+    //4学期金曜
+  ]
 ];
