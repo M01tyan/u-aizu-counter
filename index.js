@@ -6,7 +6,6 @@ var userId = '';
 var userName = '';
 var userGrade = '';
 var userDivision = '';
-var i = 0;
 var mode = "init";
 var lesson = [];
 var absence_count = {
@@ -242,25 +241,25 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年" || userGrade == "4年"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "<学籍番号>\n" +
+                  text: "学籍番号\n" +
                         "　" + userId + "\n" +
-                        "<名前>\n" +
+                        "\n名前\n" +
                         "　" + userName + "\n" +
-                        "<学年>\n" +
+                        "\n学年\n" +
                         "　" + userGrade + "\n" +
-                        "<フィールド>\n" +
+                        "\nフィールド\n" +
                         "　" + userDivision
                 }));
               } else if(userGrade == "1年" || userGrade == "2年") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "<学籍番号>\n" +
+                  text: "学籍番号\n" +
                         "　" + userId + "\n" +
-                        "<名前>\n" +
+                        "\n名前\n" +
                         "　" + userName + "\n" +
-                        "<学年>\n" +
+                        "\n学年\n" +
                         "　" + userGrade + "\n" +
-                        "<クラス>\n" +
+                        "\nクラス\n" +
                         "　" + userDivision
                 }));
               }
@@ -322,6 +321,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               userName = '';
               userGrade = '';
               userDivision = '';
+              for(var i=0; i<absence_count.template.columns.length; i++){
+                  absence_count.template.columns[i] = NULL;
+              }
             }
           } else if(mode == "addclass"){
             events_processed.push(bot.replyMessage(event.replyToken, [
