@@ -50,7 +50,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             if(event.message.text == "あ"){
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: thrid[0][0].name
+                text: thrid[0].name
               }));
             }
             var id = event.message.text.substr(0,8);
@@ -385,7 +385,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 });
 
 const third = [
-  [
     {"table": "月1", "time": "09:00 ~ 09:50", "code": "EL244", "name": "An Introduction to Cross-cultural Communication", "credits": "2", "room": "CALL2", "instructor": "Allan Nicholas"},
     {"table": "月1", "time": "09:00 ~ 09:50", "code": "EL313", "name": "Digital Storytelling for Engineering Narratives", "credits": "2", "room": "CALL1", "instructor": "ジョン　ブライン"},
     {"table": "月1", "time": "09:00 ~ 09:50", "code": "EL315", "name": "User Experience Research", "credits": "2", "room": "iLab1", "instructor": "デボプリオ　ロイ"},
@@ -422,5 +421,4 @@ const third = [
     {"table": "月10", "time": "17:50 ~ 18:40", "code": "OT02-9", "name": "ベンチャー体験工房 9", "credits": "1", "room": "-", "instructor": "陳　文西"},
     {"table": "月10", "time": "17:50 ~ 18:40", "code": "TE05", "name": "教育方法", "credits": "2", "room": "M2", "instructor": "-"},
     {"table": "月11", "time": "18:50 ~ 19:40", "code": "FU06", "name": "オペレーティングシステム論[再][演]", "credits": "4", "room": "std5, std6", "instructor": "松本　和也, 大井　仁"}
-  ]
 ];
