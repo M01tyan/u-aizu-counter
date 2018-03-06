@@ -373,14 +373,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(var i=0; i<length; i++){
+                  for(var i=0; i<spr_third.length; i++){
                     if(event.message.text.match(spr_third[i].name)){
                       class_count.title = spr_third[i].code + " " + spr_third[i].name;
                       class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: event.message.text + "を追加しました。"
+                        text: spr_third[i].code + " " + spr_third[i].name + "を追加しました。"
                       }));
                     } else if(event.message.text.match(spr_third[i].code)){
                       class_count.title = spr_third[i].code + " " + spr_third[i].name;
