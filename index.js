@@ -49,6 +49,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           //ユーザー登録モード
           if(mode == "init"){
             if(event.message.text == "あ"){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: "あ"
+              }));
               fs.readFile('./Thrid_first.json', 'utf8', function(err, text) {
                 //text = JSON.parse(text);
                 events_processed.push(bot.replyMessage(event.replyToken, {
