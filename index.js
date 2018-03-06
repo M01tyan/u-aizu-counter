@@ -50,10 +50,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           if(mode == "init"){
             if(event.message.text == "あ"){
               fs.readFile('./Thrid_first.json', 'utf8', function(err, text) {
-                var ok = JSON.parse(text);
+                text = JSON.parse(text);
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: ok
+                  text: text
                 }));
               });
             }
