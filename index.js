@@ -339,14 +339,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "授業追加を終了するときは\n終了と入力してください。"
               }
             ]));
-            if(event.message.text == "終了"){
+            if(event.message.text === "終了"){
               mode = "base";
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
             } else if(event.message.text == "1学期" || event.message.text == "2学期" || event.message.text == "3学期" || event.message.text == "4学期"){
-              
+
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
