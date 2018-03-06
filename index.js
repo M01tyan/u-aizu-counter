@@ -85,13 +85,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
           //ユーザー登録モード
           if(mode == "init"){
+            /*
             if(event.message.text == "あ"){
               var test = JSON.parse(thrid);
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
                 text: test[0].name
               }));
-            }
+            }*/
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
             //学籍番号と名前の入力形式があっているかチェック
