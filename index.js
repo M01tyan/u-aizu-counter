@@ -376,7 +376,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(var i=0; i<spr_third.length; i++){
+                  for(var i=0; i<spr_third[0].length; i++){
                     if(event.message.text == spr_third[i].name){
                       class_count.title = spr_third[i].code + " " + spr_third[i].name;
                       class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
