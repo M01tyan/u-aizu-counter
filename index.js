@@ -54,7 +54,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
                   text: text
-                });
+                }));
               });
             }
             var id = event.message.text.substr(0,8);
