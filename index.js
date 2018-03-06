@@ -1,6 +1,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
+const fs = require("fs");
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -117,6 +118,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                       ]
                     }
+                  }, {
+                    type: "text",
+                    text: read("https://github.com/M01tyan/u-aizu-counter/blob/master/Thrid_first.json")
                   }
                 ]));
                 if(id[3] == 6) {
@@ -371,3 +375,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         }
     );
 });
+
+function read(file){
+  var content = new String();
+  content = fs.readFileSync(this.file, 'utf8');
+  return content;
+}
