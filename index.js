@@ -118,9 +118,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                       ]
                     }
-                  }, {
-                    type: "text",
-                    text: read("https://github.com/M01tyan/u-aizu-counter/blob/master/Thrid_first.json")
                   }
                 ]));
                 if(id[3] == 6) {
