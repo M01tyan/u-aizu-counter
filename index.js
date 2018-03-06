@@ -376,22 +376,22 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(var i=0; i<spr_third[0].length; i++){
-                    if(event.message.text == spr_third[0][i].name){
-                      class_count.title = spr_third[0][i].code + " " + spr_third[0][i].name;
-                      class_count.text = spr_third[0][i].table + " " + spr_third[0][i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                  for(var i=0; i<spr_third_first.length; i++){
+                    if(event.message.text == spr_third_first[i].name){
+                      class_count.title = spr_third_first[i].code + " " + spr_third_first[i].name;
+                      class_count.text = spr_third_first[i].table + " " + spr_third_first[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[0][i].code + " " + spr_third[0][i].name + "を追加しました。"
+                        text: spr_third_first[i].code + " " + spr_third_first[i].name + "を追加しました。"
                       }));
-                    } else if(event.message.text == spr_third[0][i].code){
-                      class_count.title = spr_third[0][i].code + " " + spr_third[0][i].name;
-                      class_count.text = spr_third[0][i].table + " " + spr_third[0][i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                    } else if(event.message.text == spr_third_first[i].code){
+                      class_count.title = spr_third_first[i].code + " " + spr_third_first[i].name;
+                      class_count.text = spr_third_first[i].table + " " + spr_third_first[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[0][i].code + " " + spr_third[0][i].name + "を追加しました。"
+                        text: spr_third_first[i].code + " " + spr_third_first[i].name + "を追加しました。"
                       }));
                     } else {
                       events_processed.push(bot.replyMessage(event.replyToken, {
@@ -415,8 +415,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 });
 
 //授業情報
-const spr_third = [
-  [
+const spr_third_first = [
     //1学期月曜 0~35
     {table: "月1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
     {table: "月1", time: "09:00 ~ 09:50", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
@@ -523,24 +522,5 @@ const spr_third = [
     {table: "火5", time: "13:20 ~ 14:10", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
     {table: "火6", time: "14:10 ~ 15:00", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
     {table: "火7", time: "15:10 ~ 16:00", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
-    {table: "火8", time: "16:00 ~ 16:50", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
-  ], [
-    //2学期月曜
-    //2学期火曜
-    //2学期水曜
-    //2学期木曜
-    //2学期金曜
-  ], [
-    //3学期月曜
-    //3学期火曜
-    //3学期水曜
-    //3学期木曜
-    //3学期金曜
-  ], [
-    //4学期月曜
-    //4学期火曜
-    //4学期水曜
-    //4学期木曜
-    //4学期金曜
-  ]
+    {table: "火8", time: "16:00 ~ 16:50", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"}
 ];
