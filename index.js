@@ -345,6 +345,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
+            } else if(event.message.text == "1学期" || event.message.text == "2学期" || event.message.text == "3学期" || event.message.text == "4学期"){
+              
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
