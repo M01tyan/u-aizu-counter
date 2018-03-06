@@ -89,7 +89,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               var test = JSON.parse(thrid);
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: test
+                text: test[0].name
               }));
             }
             var id = event.message.text.substr(0,8);
