@@ -86,9 +86,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
           //ユーザー登録モード
           if(mode == "init"){
             if(event.message.text == "あ"){
+              var test = JSON.parse(thrid);
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: thrid
+                text: test
               }));
             }
             var id = event.message.text.substr(0,8);
