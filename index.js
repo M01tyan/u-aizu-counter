@@ -248,7 +248,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else {
               events_processed.push(bot.replyMessage(event.replyToken, {
                 type: "text",
-                text: thrid[0].name
+                text: third[0].name
               }));
             }
           } else if(mode == "divisionInit") {
