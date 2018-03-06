@@ -339,7 +339,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[0].name
+                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[0][0].name
                 }
               ]));
             } else if(event.message.text === "終了"){
@@ -416,6 +416,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
 //授業情報
 const spr_third_first = [
+  [
     //1学期月曜 0~35
     {table: "月1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
     {table: "月1", time: "09:00 ~ 09:50", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
@@ -523,4 +524,11 @@ const spr_third_first = [
     {table: "火6", time: "14:10 ~ 15:00", code: "FU05", name: "コンピュータアーキテクチャ論", credits: "4", room: "M6", instructor: "西村　憲"},
     {table: "火7", time: "15:10 ~ 16:00", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"},
     {table: "火8", time: "16:00 ~ 16:50", code: "FU05", name: "コンピュータアーキテクチャ論[演]", credits: "4", room: "hdw2", instructor: "ウォンミィング　チュー"}
+  ], [
+
+  ], [
+
+  ], [
+
+  ]
 ];
