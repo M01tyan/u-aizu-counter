@@ -12,6 +12,7 @@
   "dependencies": {
     "@line/bot-sdk": "^5.0.1",
     "express": "^4.16.2",
+    "fs": "0.0.1-security",
     "jsonfile": "^4.0.0",
     "mysql": "^2.15.0"
   }
