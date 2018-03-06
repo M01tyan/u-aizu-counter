@@ -35,6 +35,8 @@ const bot = new line.Client(line_config);
 
 // -----------------------------------------------------------------------------
 // ルーター設定
+//https://u-aizu-counter.herokuapp.com/webhook
+//https://a4c817cf.ngrok.io
 server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
     res.sendStatus(200);
