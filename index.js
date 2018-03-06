@@ -1,7 +1,8 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const fs = require("fs");
+const fs = require("jsonfile");
+var file = './Thrid_first.json';
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -58,7 +59,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               //1,2年生はクラスを入力
               if(id[3] == 6 || id[3] == 5){
                 mode = "divisionInit";
-                var content = fs.readFileSync('./Thrid_first.json', 'utf8');
+                console.dir(jsonfile.readFileSync('./Thrid_first.json'));
                 events_processed.push(bot.replyMessage(event.replyToken, [
                   {
                     type: "text",
@@ -119,9 +120,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                       ]
                     }
-                  }, {
-                    type: "text",
-                    text: content
                   }
                 ]));
                 if(id[3] == 6) {
