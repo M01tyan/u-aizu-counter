@@ -1,8 +1,7 @@
 // モジュールのインポート
 const server = require("express")();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-const fs = require("jsonfile");
-var file = './Thrid_first.json';
+const fs = require("fs");
 var userId = '';
 var userName = '';
 var userGrade = '';
@@ -50,6 +49,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
           //ユーザー登録モード
           if(mode == "init"){
+            if(event.message.text == "あ"){
+              fs.readFile('./Thrid_first.json', 'utf8', function(err, text) {
+                events_processed.push(bot.replyMessage(event.replyToken, {
+                  type: "text",
+                  text: text
+                });
+              });
+            }
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
             //学籍番号と名前の入力形式があっているかチェック
