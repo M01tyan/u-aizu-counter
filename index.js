@@ -377,21 +377,21 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(var i=0; i<spr_third[0].length; i++){
-                    if(event.message.text == spr_third[i].name){
-                      class_count.title = spr_third[i].code + " " + spr_third[i].name;
-                      class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                    if(event.message.text == spr_third[0][i].name){
+                      class_count.title = spr_third[0][i].code + " " + spr_third[0][i].name;
+                      class_count.text = spr_third[0][i].table + " " + spr_third[0][i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[i].code + " " + spr_third[i].name + "を追加しました。"
+                        text: spr_third[0][i].code + " " + spr_third[0][i].name + "を追加しました。"
                       }));
-                    } else if(event.message.text == spr_third[i].code){
-                      class_count.title = spr_third[i].code + " " + spr_third[i].name;
-                      class_count.text = spr_third[i].table + " " + spr_third[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                    } else if(event.message.text == spr_third[0][i].code){
+                      class_count.title = spr_third[0][i].code + " " + spr_third[0][i].name;
+                      class_count.text = spr_third[0][i].table + " " + spr_third[0][i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[i].code + " " + spr_third[i].name + "を追加しました。"
+                        text: spr_third[0][i].code + " " + spr_third[0][i].name + "を追加しました。"
                       }));
                     } else {
                       events_processed.push(bot.replyMessage(event.replyToken, {
