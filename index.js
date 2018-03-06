@@ -6,6 +6,7 @@ var userName = '';
 var userGrade = '';
 var userDivision = '';
 var addcnt;
+var semester;
 var mode = "init";
 var lesson = [];
 var absence_count = {
@@ -338,7 +339,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[1].length
+                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third[1].length
                 }
               ]));
             } else if(event.message.text === "終了"){
@@ -348,7 +349,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 type: "text",
                 text: "授業追加モードを終了します。"
               }));
-            } else if(event.message.text == "1学期" || event.message.text == "2学期" || event.message.text == "3学期" || event.message.text == "4学期"){
+            } else if(event.message.text == "1学期"){
+              semester = 0;
+            } else if(event.message.text == "2学期"){
+              semester = 1;
+            } else if(event.message.text == "3学期"){
+              semester = 2;
+            } else if(event.message.text == "4学期"){
+              semester = 3;
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
@@ -375,22 +383,22 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(var i=0; i<spr_third_first.length; i++){
-                    if(event.message.text == spr_third_first[i].name){
-                      class_count.title = spr_third_first[i].code + " " + spr_third_first[i].name;
-                      class_count.text = spr_third_first[i].table + " " + spr_third_first[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                  for(var i=0; i<spr_third[semester].length; i++){
+                    if(event.message.text == spr_third[semester][i].name){
+                      class_count.title = spr_third[semester][i].code + " " + spr_third[semester][i].name;
+                      class_count.text = spr_third[semester][i].table + " " + spr_third[semester][i].time + "\n" + spr_third[semester][i].room + " " + spr_third[semester][i].instructor + "\n単位数：" + spr_third[semester][i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third_first[i].code + " " + spr_third_first[i].name + "を追加しました。"
+                        text: spr_third[semester][i].code + " " + spr_third[semester][i].name + "を追加しました。"
                       }));
-                    } else if(event.message.text == spr_third_first[i].code){
-                      class_count.title = spr_third_first[i].code + " " + spr_third_first[i].name;
-                      class_count.text = spr_third_first[i].table + " " + spr_third_first[i].time + "\n" + spr_third[i].room + " " + spr_third[i].instructor + "\n単位数：" + spr_third[i].credits;
+                    } else if(event.message.text == spr_third[semester][i].code){
+                      class_count.title = spr_third[semester][i].code + " " + spr_third[semester][i].name;
+                      class_count.text = spr_third[semester][i].table + " " + spr_third[semester][i].time + "\n" + spr_third[semester][i].room + " " + spr_third[semester][i].instructor + "\n単位数：" + spr_third[semester][i].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third_first[i].code + " " + spr_third_first[i].name + "を追加しました。"
+                        text: spr_third[semester][i].code + " " + spr_third[semester][i].name + "を追加しました。"
                       }));
                     } else {
                       events_processed.push(bot.replyMessage(event.replyToken, {
@@ -414,7 +422,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 });
 
 //授業情報
-const spr_third_first = [
+const spr_third = [
   [
     //1学期月曜 0~35
     {table: "月1", time: "09:00 ~ 09:50", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
