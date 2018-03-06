@@ -339,7 +339,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first
+                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third_first[0]
                 }
               ]));
             } else if(event.message.text === "終了"){
