@@ -49,14 +49,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
           //ユーザー登録モード
           if(mode == "init"){
-            /*
-            if(event.message.text == "あ"){
-              var test = JSON.parse(thrid);
-              events_processed.push(bot.replyMessage(event.replyToken, {
-                type: "text",
-                text: test[0].name
-              }));
-            }*/
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
             //学籍番号と名前の入力形式があっているかチェック
@@ -126,9 +118,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         }
                       ]
                     }
-                  }, {
-                    type: "text",
-                    text: ok
                   }
                 ]));
                 if(id[3] == 6) {
@@ -366,7 +355,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     {
                         type: "message",
                         label: "詳細",
-                        text: "詳細"
+                        text: lesson[0].code + " " + lesson[0].name + "\n" + lesson[0].table + " " + lesson[0].time + "\n" + "教室：" + lesson[0].room + "　教授：" + lesson[0].instructor + "\n単位数：" + lesson[0].credits
                     }, {
                         type: "message",
                         label: "削除",
@@ -378,17 +367,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 if(userDivision == "IT-SPR"){
                   for(var j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code || event.message.text == spr_third[semester][j].code + " " + spr_third[semester][j].name){
-                      //class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
-                      var table = spr_third[semester][j].table.split(",");
-                      var time = spr_third[semester][j].time.split(",");
-                      for(var k=0; k<table.length; k+=1){
-                        class_count.text += table[k] + " " + time[k] + "\n";
-                      }
-                      class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
+                      class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
+                      lesson.push(spr_third[semester][j]);
+                      //class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + absence_count.template.columns[0].text
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
                       }));
                       break;
                     }
