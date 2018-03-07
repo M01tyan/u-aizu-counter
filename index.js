@@ -49,6 +49,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
         if (event.type == "message" && event.message.type == "text"){
           //ユーザー登録モード
           if(mode == "init"){
+            /*
+            if(event.message.text == "あ"){
+              var test = JSON.parse(thrid);
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: test[0].name
+              }));
+            }*/
             var id = event.message.text.substr(0,8);
             var name = event.message.text.substr(9, 14);
             //学籍番号と名前の入力形式があっているかチェック
@@ -376,7 +384,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(var j=0; j<spr_third[semester].length; j+=1){
-                    if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code){
+                    if(event.message.text == spr_third[semester][j].name){
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
                       class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
