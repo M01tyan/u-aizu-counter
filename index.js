@@ -384,16 +384,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       var time = spr_third[semester][j].time.split(",");
                       for(var k=0; k<table.length; k+=1){
                         class_count.text += table[k] + " " + time[k] + "\n";
-                        events_processed.push(bot.replyMessage(event.replyToken, {
-                          type: "text",
-                          text: table[k] + " " + time[k]
-                        }));
                       }
                       class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + absence_count.template.columns[0].text
                       }));
                       break;
                     }
