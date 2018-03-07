@@ -356,7 +356,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     {
                         type: "message",
                         label: "詳細",
-                        text: lesson[0].code + " " + lesson[0].name + "\n" + lesson[0].table + " " + lesson[0].time + "\n" + "教室：" + lesson[0].room + "　教授：" + lesson[0].instructor + "\n単位数：" + lesson[0].credits
+                        text: spr_third[0][0].name
                     }, {
                         type: "message",
                         label: "削除",
