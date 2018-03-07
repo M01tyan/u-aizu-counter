@@ -383,30 +383,18 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  var set_class_name = '';
-                  var set_class_time = '';
-                  var set_class_table = '';
-                  var set_class_room = '';
-                  var set_class_instructor = '';
-                  var set_class_credits = '';
                   for(var j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code){
-                      set_class_name = spr_third[semester][j].name;
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
-                      set_class_room = spr_third[semester][j].room;
-                      set_class_instructor = spr_third[semester][j].instructor;
-                      set_class_credits = spr_third[semester][j].credits;
-                      set_class_time += spr_third[semester][j].time;
-                      set_class_table += spr_third[semester][j].table;
+                      class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
+                      absence_count.template.columns.push(class_count);
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
+                      }));
                       continue;
                     }
                   }
-                  class_count.text = set_class_table + " " + set_class_time + "\n教室：" + set_class_room + "　教授：" + set_class_instructor + "\n単位数：" + set_class_credits;
-                  absence_count.template.columns.push(class_count);
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: class_count.title + "を追加しました。"
-                  }));
                   if(j == spr_third[semester].length) {
                     events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
