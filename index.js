@@ -365,7 +365,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "ok",
                 actions: [
                     {
-                        type: "messages",
+                        type: "message",
+                        label: "詳細",
+                        text: "詳細"
+                    }, {
+                        type: "message",
                         label: "削除",
                         text: "削除"
                     }
