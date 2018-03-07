@@ -369,12 +369,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   for(var j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code || event.message.text == spr_third[semester][j].code + " " + spr_third[semester][j].name){
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
-                      //lesson.push(spr_third[semester][j]);
+                      lesson.push(spr_third[semester][j]);
                       class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0]
                       }));
                       break;
                     }
