@@ -362,7 +362,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
                 imageBackgroundColor: "#FFFFFF",
                 title: "",
-                text: "",
+                text: "ok",
                 actions: [
                     {
                         type: "postback",
@@ -384,7 +384,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(let j=0; j<spr_third[semester].length; j+=1){
-                    if(event.message.text.match == spr_third[semester][j].name){
+                    if(event.message.text == spr_third[semester][j].name){
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
                       class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n" + spr_third[semester][j].room + " " + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
