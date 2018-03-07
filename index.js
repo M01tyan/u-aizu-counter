@@ -374,7 +374,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0]
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0].toString()
                       }));
                       break;
                     }
@@ -403,7 +403,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 const spr_third = [
   [
     //1学期
-    {table: "月1, 月2, 木1, 木2", time: "09:00 ~ 09:50, 09:50 ~ 10:40, 09:00 ~ 09:50, 09:50 ~ 10:40", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
+    {table: ["月1", "月2", "木1", "木2"], time: "09:00 ~ 09:50, 09:50 ~ 10:40, 09:00 ~ 09:50, 09:50 ~ 10:40", code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
     {table: "月1, 月2, 木1, 木2", time: "09:00 ~ 09:50, 09:50 ~ 10:40, 09:00 ~ 09:50, 09:50 ~ 10:40", code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
     {table: "月1, 月2, 木1, 木2", time: "09:00 ~ 09:50, 09:50 ~ 10:40, 09:00 ~ 09:50, 09:50 ~ 10:40", code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
     {table: "月1, 月2, 木1, 木2", time: "09:00 ~ 09:50, 09:50 ~ 10:40, 09:00 ~ 09:50, 09:50 ~ 10:40", code: "EL328", name: "Logic and language", credits: "2", room: "iLab2", instructor: "ジョン　ブレイク"},
