@@ -362,7 +362,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
                 imageBackgroundColor: "#FFFFFF",
                 title: "",
-                text: "ok",
+                text: "",
                 actions: [
                     {
                         type: "message",
@@ -382,9 +382,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
                       var table = spr_third[semester][j].table.split(",");
                       var time = spr_third[semester][j].time.split(",");
+                      /*
                       for(var k=0; k<table.length; k+=1){
                         class_count.text += table[k] + " " + time[k] + "\n";
                       }
+                      */
                       class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
