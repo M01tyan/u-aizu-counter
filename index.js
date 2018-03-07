@@ -393,12 +393,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         text: spr_third[0][j].code + " " + spr_third[0][j].name + "を追加しました。"
                       }));
                       break;
-                    } else {
-                      events_processed.push(bot.replyMessage(event.replyToken, {
-                        type: "text",
-                        text: "授業がありません\nもう一度入力してください"
-                      }));
                     }
+                  }
+                  if(j == spr_third[0].length) {
+                    events_processed.push(bot.replyMessage(event.replyToken, {
+                      type: "text",
+                      text: "授業がありません\nもう一度入力してください"
+                    }));
                   }
                 }
               }
