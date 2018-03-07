@@ -350,6 +350,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
                 imageBackgroundColor: "#FFFFFF",
+                title: "",
                 text: "",
                 actions: [
                     {
