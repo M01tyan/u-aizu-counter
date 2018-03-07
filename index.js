@@ -383,13 +383,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "ok"
-                  }));
                   //for(let j=0; j<spr_third[semester].length; j+=1){
-                    if(event.message.text == spr_third[semester][0].name){
-                      class_count.title = spr_third[semester][0].code + " " + spr_third[semester][0].name;
+                    if(event.message.text == spr_third[semester][8].name){
+                      /*class_count.title = spr_third[semester][0].code + " " + spr_third[semester][0].name;
                       class_count.text = spr_third[semester][0].table + " " + spr_third[semester][0].time + "\n" + spr_third[semester][0].room + " " + spr_third[semester][0].instructor + "\n単位数：" + spr_third[semester][0].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
@@ -397,6 +393,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         text: spr_third[semester][0].code + " " + spr_third[semester][0].name + "を追加しました。"
                       }));
                       //break;
+                      */
+                      events_processed.push(bot.replyMessage(event.replyToken, {
+                        type: "text",
+                        text: "ok"
+                      }));
                     } else {
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
