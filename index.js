@@ -365,26 +365,16 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 text: "ok",
                 actions: [
                     {
-                        type: "postback",
-                        label: "Buy",
-                        data: "action=buy&itemid=111"
-                    },
-                    {
-                        type: "postback",
-                        label: "Add to cart",
-                        data: "action=add&itemid=111"
-                    },
-                    {
-                        type: "uri",
-                        label: "View detail",
-                        uri: "http://example.com/page/111"
+                        type: "messages",
+                        label: "削除",
+                        text: "削除"
                     }
                 ]
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(var j=0; j<spr_third[semester].length; j+=1){
-                    if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code){
+                    if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code || event.message.text == spr_third[semester][j].code + " " + spr_third[semester][j].name){
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
                       class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
