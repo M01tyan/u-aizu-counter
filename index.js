@@ -339,7 +339,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01"
                 },{
                   type: "text",
-                  text: "授業追加を終了するときは\n終了と入力してください。\n" + spr_third[semester].length
+                  text: "授業追加を終了するときは\n終了と入力してください。\n"
                 }
               ]));
             } else if(event.message.text === "終了"){
@@ -384,7 +384,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
                   for(var i=0; i<spr_third[semester].length; i+=1){
-                    if(event.message.text == spr_third[semester][i].name){
+                    if(event.message.text.match(spr_third[semester][i].name)){
                       class_count.title = spr_third[semester][i].code + " " + spr_third[semester][i].name;
                       class_count.text = spr_third[semester][i].table + " " + spr_third[semester][i].time + "\n" + spr_third[semester][i].room + " " + spr_third[semester][i].instructor + "\n単位数：" + spr_third[semester][i].credits;
                       absence_count.template.columns.push(class_count);
@@ -392,7 +392,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         type: "text",
                         text: spr_third[semester][i].code + " " + spr_third[semester][i].name + "を追加しました。"
                       }));
-                    } else if(event.message.text == spr_third[semester][i].code){
+                    } else if(event.message.text.match(spr_third[semester][i].code)){
                       class_count.title = spr_third[semester][i].code + " " + spr_third[semester][i].name;
                       class_count.text = spr_third[semester][i].table + " " + spr_third[semester][i].time + "\n" + spr_third[semester][i].room + " " + spr_third[semester][i].instructor + "\n単位数：" + spr_third[semester][i].credits;
                       absence_count.template.columns.push(class_count);
