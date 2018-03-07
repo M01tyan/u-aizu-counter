@@ -407,7 +407,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       break;
                     }
                   }
-                  if(j == spr_third[semester].length || k == spr_third[semester].length) {
+                  if(j == spr_third[semester].length && k == spr_third[semester].length) {
                     events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "授業がありません\nもう一度入力してください"
