@@ -361,7 +361,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
                 imageBackgroundColor: "#FFFFFF",
-                title: "",
                 text: "",
                 actions: [
                     {
@@ -379,14 +378,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                 if(userDivision == "IT-SPR"){
                   for(var j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][j].name || event.message.text == spr_third[semester][j].code || event.message.text == spr_third[semester][j].code + " " + spr_third[semester][j].name){
-                      class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
+                      //class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
                       var table = spr_third[semester][j].table.split(",");
                       var time = spr_third[semester][j].time.split(",");
-                      /*
                       for(var k=0; k<table.length; k+=1){
                         class_count.text += table[k] + " " + time[k] + "\n";
                       }
-                      */
                       class_count.text += "教室：" + spr_third[semester][j].room + "　教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
