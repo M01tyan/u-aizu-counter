@@ -383,6 +383,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
+                  events_processed.push(bot.replyMessage(event.replyToken, {
+                    type: "text",
+                    text: "ok"
+                  }));
                   //for(let j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][0].name){
                       class_count.title = spr_third[semester][0].code + " " + spr_third[semester][0].name;
