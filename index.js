@@ -383,10 +383,10 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(let j=0; j<spr_third[semester].length; j+=1){
+                  for(var j=0; j<spr_third[semester].length; j+=1){
                     if(event.message.text == spr_third[semester][j].name){
                       class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
-                      class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n" + spr_third[semester][j].room + " " + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
+                      class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n教室：" + spr_third[semester][j].room + " \n教授：" + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
