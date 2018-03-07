@@ -392,7 +392,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                         type: "text",
                         text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
                       }));
-                      continue;
+                      break;
                     }
                   }
                   if(j == spr_third[semester].length) {
