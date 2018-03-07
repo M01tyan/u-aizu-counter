@@ -383,19 +383,19 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               };
               if(userGrade == "3年"){
                 if(userDivision == "IT-SPR"){
-                  for(let j=0; j<spr_third[0].length; j+=1){
-                    if(event.message.text == spr_third[0][j].name){
-                      class_count.title = spr_third[0][j].code + " " + spr_third[0][j].name;
-                      class_count.text = spr_third[0][j].table + " " + spr_third[0][j].time + "\n" + spr_third[0][j].room + " " + spr_third[0][j].instructor + "\n単位数：" + spr_third[0][j].credits;
+                  for(let j=0; j<spr_third[semester].length; j+=1){
+                    if(event.message.text == spr_third[semester][j].name){
+                      class_count.title = spr_third[semester][j].code + " " + spr_third[semester][j].name;
+                      class_count.text = spr_third[semester][j].table + " " + spr_third[semester][j].time + "\n" + spr_third[semester][j].room + " " + spr_third[semester][j].instructor + "\n単位数：" + spr_third[semester][j].credits;
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[0][j].code + " " + spr_third[0][j].name + "を追加しました。"
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
                       }));
                       break;
                     }
                   }
-                  if(j == spr_third[0].length) {
+                  if(j == spr_third[semester].length) {
                     events_processed.push(bot.replyMessage(event.replyToken, {
                       type: "text",
                       text: "授業がありません\nもう一度入力してください"
