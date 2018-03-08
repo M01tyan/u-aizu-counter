@@ -379,7 +379,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0].name
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。"
                       }));
                       break;
                     }
