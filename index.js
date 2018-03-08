@@ -356,7 +356,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     {
                         type: "message",
                         label: "詳細",
-                        text: spr_third[0][0].name
+                        text: "詳細"
                     }, {
                         type: "message",
                         label: "削除",
@@ -374,7 +374,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                       absence_count.template.columns.push(class_count);
                       events_processed.push(bot.replyMessage(event.replyToken, {
                         type: "text",
-                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0].toString()
+                        text: spr_third[semester][j].code + " " + spr_third[semester][j].name + "を追加しました。" + lesson[0].name
                       }));
                       break;
                     }
