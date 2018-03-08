@@ -411,15 +411,6 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     );
 });
 
-function addClassList() {
-  var list = '';
-  var length = 0;
-  if(semester == 0){ length = 56; }
-  for(var i=0; i<length; i++){
-    list += spr_third[semester][i].code + " " + spr_third[semester][i].name + "\n";
-  }
-  return list;
-}
 //授業情報-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const spr_third = [
   [
