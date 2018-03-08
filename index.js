@@ -325,12 +325,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "\n例：\n" +
                   "MA01 線形代数 I\n" +
                   "線形代数 I\n" +
-                  "MA01\n\n" +
-                  "あなたの" + (semester+1) + "学期の授業は\n" +
-                  addClassList()
-                }, {
-                  type: "text",
-                  text: spr_third[semester][0].code + " " + spr_third[semester][0].name
+                  "MA01\n"
                 }, {
                   type: "text",
                   text: "授業追加を終了するときは\n終了と入力してください。"
