@@ -230,26 +230,26 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               if(userGrade == "3年" || userGrade == "4年"){
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "学籍番号\n" +
-                        "　" + userId + "\n" +
-                        "\n名前\n" +
-                        "　" + userName + "\n" +
-                        "\n学年\n" +
-                        "　" + userGrade + "\n" +
-                        "\nフィールド\n" +
-                        "　" + userDivision
+                  text: "~学籍番号~\n" +
+                        userId + "\n" +
+                        "\n~名前~\n" +
+                        userName + "\n" +
+                        "\n~学年~\n" +
+                        userGrade + "\n" +
+                        "\n~フィールド~\n" +
+                        userDivision
                 }));
               } else if(userGrade == "1年" || userGrade == "2年") {
                 events_processed.push(bot.replyMessage(event.replyToken, {
                   type: "text",
-                  text: "学籍番号\n" +
-                        "　" + userId + "\n" +
-                        "\n名前\n" +
-                        "　" + userName + "\n" +
-                        "\n学年\n" +
-                        "　" + userGrade + "\n" +
-                        "\nクラス\n" +
-                        "　" + userDivision
+                  text: "~学籍番号~\n" +
+                        userId + "\n" +
+                        "\n~名前~\n" +
+                        userName + "\n" +
+                        "\n~学年~\n" +
+                        userGrade + "\n" +
+                        "\n~クラス~\n" +
+                        userDivision
                 }));
               }
             } else if(event.message.text == "追加"){
@@ -325,8 +325,12 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "\n例：\n" +
                   "MA01 線形代数 I\n" +
                   "線形代数 I\n" +
-                  "MA01"
-                },{
+                  "MA01\n" +
+                  addclass_list()
+                }, {
+                  type: "text",
+                  text: spr_third[semester][0].code + " " + spr_third[semester][0].name
+                }, {
                   type: "text",
                   text: "授業追加を終了するときは\n終了と入力してください。"
                 }
@@ -411,7 +415,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     );
 });
 
-//授業情報
+function addClassList() {
+  var list = '';
+  for(var i=0; i<spr_third[semester].length; i++){
+    list += spr_third[semester][i].code + " " + spr_third[semester][i].name;
+  }
+  return list;
+}
+//授業情報-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const spr_third = [
   [
     //1学期
