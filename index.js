@@ -325,7 +325,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "\n例：\n" +
                   "MA01 線形代数 I\n" +
                   "線形代数 I\n" +
-                  "MA01\n" +
+                  "MA01\n\n" +
+                  "あなたの" + (semester+1) + "学期の授業は\n" +
                   addClassList()
                 }, {
                   type: "text",
@@ -420,7 +421,7 @@ function addClassList() {
   var length = 0;
   if(semester == 0){ length = 56; }
   for(var i=0; i<length; i++){
-    list += spr_third[semester][i].code + " " + spr_third[semester][i].name;
+    list += spr_third[semester][i].code + " " + spr_third[semester][i].name + "\n";
   }
   return list;
 }
