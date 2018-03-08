@@ -346,6 +346,11 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
               semester = 2;
             } else if(event.message.text == "4学期"){
               semester = 3;
+            } else if(event.message.text == "詳細"){
+              events_processed.push(bot.replyMessage(event.replyToken, {
+                type: "text",
+                text: lesson[0].name
+              }));
             } else {
               let class_count = {
                 thumbnailImageUrl: "https://raw.githubusercontent.com/M01tyan/u-aizu-counter/master/img/count5.jpg",
