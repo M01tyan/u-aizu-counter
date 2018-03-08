@@ -326,7 +326,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   "MA01 線形代数 I\n" +
                   "線形代数 I\n" +
                   "MA01\n" +
-                  addclass_list()
+                  addClassList()
                 }, {
                   type: "text",
                   text: spr_third[semester][0].code + " " + spr_third[semester][0].name
