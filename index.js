@@ -291,7 +291,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             } else if(event.message.text == "ヘルプ"){
               mode = "help";
             } else if(event.message.text == "欠席数カウント"){
-              //mode = "absence";
+              mode = "absence";
               events_processed.push(bot.replyMessage(event.replyToken, absence_count));
             } else if(event.message.text == "ユーザー登録"){
               events_processed.push(bot.replyMessage(event.replyToken, [
@@ -392,6 +392,13 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                   }
                 }
               }
+            }
+          } else if(mode == "absence") {
+            if(event.message.text == "詳細"){
+             events_processed.push(bot.replyMessage(event.replyToken, {
+               type: "text",
+               text: lesson[0].name
+             }));
             }
           }
         }
