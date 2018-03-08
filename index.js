@@ -417,7 +417,9 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
 
 function addClassList() {
   var list = '';
-  for(var i=0; i<spr_third[semester].length; i++){
+  var length = 0;
+  if(semester == 0){ length = 56; }
+  for(var i=0; i<length; i++){
     list += spr_third[semester][i].code + " " + spr_third[semester][i].name;
   }
   return list;
@@ -425,7 +427,7 @@ function addClassList() {
 //授業情報-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const spr_third = [
   [
-    //1学期
+    //1学期 0~55
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL244", name: "An Introduction to Cross-cultural Communication", credits: "2", room: "CALL2", instructor: "Allan Nicholas"},
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL313", name: "Digital Storytelling for Engineering Narratives", credits: "2", room: "CALL1", instructor: "ジョン　ブライン"},
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL315", name: "User Experience Research", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
@@ -483,7 +485,7 @@ const spr_third = [
     {table: ["木9", "木10", "木11"], time: ["17:00 ~ 17:50", "17:50 ~ 18:40", "18:50 ~ 19:40"], code: "OT03-028", name: "立体形状物のモデリングと造形", credits: "1", instructor: "吉岡　廉太郎"},
     {table: ["木9", "木10", "木11"], time: ["17:00 ~ 17:50", "17:50 ~ 18:40", "18:50 ~ 19:40"], code: "OT03-029", name: "探索工房：AIは探索である", credits: "1", instructor: "趙　強福"}
   ], [
-    //2学期
+    //2学期 56~107
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL144", name: "Conversation Analysis and the Pragmatics of Spoken Interaction", credits: "2", room: "CALL1", instructor: "Allan Nicholas"},
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL222", name: "Writing in the Workplace", credits: "2", room: "iLab1", instructor: "デボプリオ　ロイ"},
     {table: ["月1", "月2", "木1", "木2"], time: ["09:00 ~ 09:50", "09:50 ~ 10:40", "09:00 ~ 09:50", "09:50 ~ 10:40"], code: "EL314", name: "Experimental Methods and Statistics for Linguistics", credits: "2", room: "CALL2", instructor: "ジュレミー　パーキンズ"},
@@ -537,7 +539,7 @@ const spr_third = [
     {table: ["木9", "木10", "木11"], time: ["17:00 ~ 17:50", "17:50 ~ 18:40", "18:50 ~ 19:40"], code: "OT03-028", name: "立体形状物のモデリングと造形", credits: "1", instructor: "吉岡　廉太郎"},
     {table: ["木9", "木10", "木11"], time: ["17:00 ~ 17:50", "17:50 ~ 18:40", "18:50 ~ 19:40"], code: "OT03-029", name: "探索工房：AIは探索である", credits: "1", instructor: "趙　強福"}
   ], [
-    //3学期
+    //3学期 108~131
     {table: ["月2", "月3", "木2", "木3"], time: ["09:50 ~ 10:40", "10:50 ~ 11:40", "09:50 ~ 10:40", "10:50 ~ 11:40"], code: "FU08", name: "オートマトンと言語理論", credits: "3", room: "M2", instructor: "モハメド　ハマダ"},
     {table: ["月4", "木4"], time: ["09:50 ~ 10:40", "10:50 ~ 11:40"], code: "FU08", name: "オートマトンと言語理論[演]", credits: "3", room: "M2", instructor: "モハメド　ハマダ"},
     {talbe: ["月5", "月6", "木5", "木6"], time: ["13:20 ~ 14:10", "14:10 ~ 15:00", "13:20 ~ 14:10", "14:10 ~ 15:00"], code: "EL102", name: "Design of Human Languages", credits: "2", room: "iLab1", instructor: "ホウ　ヨンヒョン"},
@@ -563,7 +565,7 @@ const spr_third = [
     {table: ["水7", "水8"], time: ["15:10 ~ 16:00", "16:00 ~ 16:50"], code: "OT08", name: "TOEIC準備コース(Level B)", credits: "1", room: "iLab2", instructor: "桑田　カツ子"},
     {table: ["水9", "水10"], time: ["17:00 ~ 17:50", "17:50 ~ 18:40"], code: "OT06", name: "キャリアデザイン II", credits: "1", room: "LTh", instructor: "杉山　雅英"},
   ], [
-    //4学期
+    //4学期 132~158
     {table: ["月5", "月6", "木5", "木6"], time: ["13:20 ~ 14:10", "14:10 ~ 15:00", "13:20 ~ 14:10", "14:10 ~ 15:00"], code: "EL113", name: "Pronunciation: Comparing English and Japanese Sound Systems", credits: "2", room: "iLab2", instructor: "イアン　ウィルソン"},
     {table: ["月5", "月6", "木5", "木6"], time: ["13:20 ~ 14:10", "14:10 ~ 15:00", "13:20 ~ 14:10", "14:10 ~ 15:00"], code: "EL115", name: "Analysis of English Sentence Structure", credits: "2", room: "CALL2", instructor: "金子　恵美子"},
     {table: ["月5", "月6", "木5", "木6"], time: ["13:20 ~ 14:10", "14:10 ~ 15:00", "13:20 ~ 14:10", "14:10 ~ 15:00"], code: "EL218", name: "Presentation Skills", credits: "2", room: "CALL1", instructor: "ホウ　ヨンヒョン"},
